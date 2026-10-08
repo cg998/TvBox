@@ -1,6 +1,15 @@
 {
   "sites": [
     {
+      "key": "tpzy",
+      "name": "淘片资源",
+      "type": 1,
+      "api": "https://taopianapi.com/cjapi/mc/vod/json.html",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
       "key": "lzzy",
       "name": "量子资源",
       "type": 1,
@@ -37,10 +46,10 @@
       "filterable": 1
     },
     {
-      "key": "tpzy",
-      "name": "淘片资源",
+      "key": "hhdm",
+      "name": "火狐资源",
       "type": 1,
-      "api": "https://taopianapi.com/cjapi/mc/vod/json.html",
+      "api": "https://hhzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
@@ -50,15 +59,6 @@
       "name": "非凡备用",
       "type": 1,
       "api": "http://ffzy5.tv/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "hhdm",
-      "name": "火狐资源",
-      "type": 1,
-      "api": "https://hhzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
