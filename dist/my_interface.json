@@ -75,48 +75,24 @@
       "filterable": 1
     },
     {
-      "key": "WexduoduoziyuanGuard",
-      "name": "💓多多┃4K💓",
+      "key": "WexikanbotGuard",
+      "name": "🎇爱看┃采集🎇",
       "type": 3,
-      "api": "csp_WexduoduoziyuanGuard",
+      "api": "csp_WexikanbotGuard",
       "searchable": 1,
-      "changeable": 1,
-      "timeout": 120
+      "changeable": 1
     },
     {
-      "key": "哔哩哔哩",
-      "name": "哔哩合集",
+      "key": "热播多线",
+      "name": "热播多线",
       "type": 3,
-      "api": "csp_BiliGuard",
+      "api": "csp_AppTTGuard",
+      "timeout": 15,
+      "playerType": 2,
       "searchable": 1,
       "quickSearch": 1,
-      "filterable": 1,
-      "changeable": 0,
-      "ext": {
-        "json": "./json/bilibili.json"
-      }
-    },
-    {
-      "key": "Wexnullname",
-      "name": "💓无名┃4K💓",
-      "type": 3,
-      "api": "csp_WexnullnameGuard",
-      "searchable": 1,
       "changeable": 1,
-      "timeout": 120
-    },
-    {
-      "key": "哔哩歌曲",
-      "name": "哔哩歌曲",
-      "type": 3,
-      "api": "csp_BiliGuard",
-      "searchable": 0,
-      "quickSearch": 0,
-      "filterable": 1,
-      "changeable": 0,
-      "ext": {
-        "json": "./json/biliych.json"
-      }
+      "ext": "uqGL1bNENExT7/hGxpSE5qU="
     },
     {
       "key": "Wexpan123ziyuanGuard",
@@ -127,33 +103,57 @@
       "changeable": 1
     },
     {
-      "key": "哔哩明星",
-      "name": "哔哩明星",
+      "key": "云盘配置",
+      "name": "云盘配置",
       "type": 3,
-      "api": "csp_BiliGuard",
-      "searchable": 0,
-      "quickSearch": 0,
-      "filterable": 1,
+      "api": "csp_MyDriveGuard",
       "changeable": 0,
+      "indexs": 0,
+      "searchable": 1,
+      "style": {
+        "type": "oval"
+      },
       "ext": {
-        "json": "./json/bilimx.json"
+        "Cloud-drive": "tvfan/Cloud-drive.txt"
       }
     },
     {
-      "key": "玩偶",
-      "name": "💓‍玩偶┃4K💓‍",
+      "key": "WexhubanGuard",
+      "name": "💓虎斑┃4K💓",
       "type": 3,
-      "api": "csp_WoggGuard",
+      "api": "csp_WexhubanGuard",
       "searchable": 1,
       "changeable": 1
     },
     {
-      "key": "csp_Nmys",
-      "name": "🎇伯伯┃秒播🎇",
+      "key": "日本动漫",
+      "name": "日本动漫",
       "type": 3,
-      "api": "csp_WexNmysGuard",
+      "api": "csp_Anime1Guard",
       "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "巴士动漫",
+      "name": "巴士动漫",
+      "type": 3,
+      "api": "csp_Dm84Guard",
+      "timeout": 10,
+      "searchable": 1,
+      "quickSearch": 1,
       "changeable": 1
+    },
+    {
+      "key": "剧圈多线",
+      "name": "剧圈多线",
+      "type": 3,
+      "api": "csp_AppSxGuard",
+      "timeout": 10,
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "rfOX1voDIQhH8epBwpmIsuSluiuZl4+/lm1iJsy3HwNWMxpf9CY77fshI+kByoxy7DyPatUZ1jk0ty1p"
     }
   ],
   "parses": [
