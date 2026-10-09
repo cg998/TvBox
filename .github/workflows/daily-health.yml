@@ -1,0 +1,36 @@
+name: 每日源健康检查
+
+on:
+  schedule:
+    - cron: '20 21 * * *'   # 每天北京时间 05:20 运行(父母起床看电视前)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: pip install requests pycryptodome
+
+      - name: 运行健康检查
+        run: python health_check.py config.json
+
+      - name: 有变化才提交
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/
+          git diff --cached --quiet && echo "无变化,跳过提交" || (git commit -m "health: 每日体检 $(date -u +%Y-%m-%d)" && git push)
+
+      - name: 刷新 jsdelivr 缓存
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/dist/my_interface.json" || true

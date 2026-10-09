@@ -1,0 +1,35 @@
+{
+  "seeds": [
+    { "name": "鱼妖-m", "url": "https://raw.githubusercontent.com/cyao2q/files/master/m.json" },
+    { "name": "鱼妖-n", "url": "https://raw.githubusercontent.com/cyao2q/files/master/n.json" },
+    { "name": "泥巴-jsm(加密)", "url": "https://raw.githubusercontent.com/guot55/yg/main/pg/jsm.json" },
+    { "name": "hl128k合集", "url": "https://raw.githubusercontent.com/hl128k/tvbox/main/tv/0/collection.json" },
+    { "name": "meowcf", "url": "https://freed.yuanhsing.cf/TVBox/meowcf.json" },
+    { "name": "饭太硬", "url": "http://www.饭太硬.net/tv" },
+    { "name": "肥猫", "url": "http://肥猫.com" },
+    { "name": "王二小", "url": "http://tvbox.王二小放牛娃.top" },
+    { "name": "摸鱼儿", "url": "http://我不是.摸鱼儿.top" }
+  ],
+  "options": {
+    "workers": 16,
+    "timeout": 10,
+    "retries": 2,
+    "max_latency_ms": 5000,
+    "hd_probe": true,
+    "hd_probe_limit": 40,
+    "keep_spiders": true,
+    "max_spiders": 8,
+    "max_sites": 30,
+    "collection_limit": 6,
+    "drop_keywords": ["公众号", "关注", "打赏", "加群", "失效", "测试勿用"]
+  },
+  "output": {
+    "interface": "dist/my_interface.json",
+    "report": "dist/report.md"
+  },
+  "health": {
+    "fail_threshold": 3,
+    "state_file": "dist/health_state.json",
+    "report": "dist/health_report.md"
+  }
+}

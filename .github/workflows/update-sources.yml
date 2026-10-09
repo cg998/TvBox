@@ -1,0 +1,37 @@
+name: 每周全量筛选影视源
+
+on:
+  schedule:
+    - cron: '20 1 * * 0'   # 每周日北京时间 09:20 运行
+  workflow_dispatch:        # 允许手动触发(想立即换血时点这个)
+
+permissions:
+  contents: write
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: pip install requests pycryptodome
+
+      - name: 运行筛选脚本
+        run: python filter_sources.py config.json
+
+      - name: 提交结果到仓库
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/
+          git diff --cached --quiet || git commit -m "chore: 自动筛选更新源 $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: 刷新 jsdelivr 缓存
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/dist/my_interface.json" || true
