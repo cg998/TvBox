@@ -23,6 +23,11 @@ import requests
 
 BUCKET = os.environ.get("COS_BUCKET", "tvbox-202610-1503022424")
 REGION = os.environ.get("COS_REGION", "ap-guangzhou")
+# 上传走的域名(境外 GitHub 传中国 COS 必须走全球加速, 否则跨境直传超时)
+# 留空则用区域新域名 tencentcos.cn; 填 cos.accelerate.myqcloud.com 用全球加速(推荐)
+COS_ENDPOINT = os.environ.get("COS_ENDPOINT", "")
+COS_TIMEOUT = int(os.environ.get("COS_TIMEOUT", "120"))
+# 对外访问地址(电视端读取用, 保持国内可直连的 myqcloud.com)
 COS_BASE = "https://%s.cos.%s.myqcloud.com" % (BUCKET, REGION)
 INTERFACE_KEY = "my_interface.json"
 FALLBACK_SOURCE_BASE = "https://raw.githubusercontent.com/cyao2q/files/master/"
@@ -69,17 +74,34 @@ def cos_client():
         skey = os.environ.get("TENCENT_SECRET_KEY", "")
         if not sid or not skey:
             raise RuntimeError("缺少 TENCENT_SECRET_ID / TENCENT_SECRET_KEY 环境变量")
-        _cos = CosS3Client(CosConfig(Region=REGION, SecretId=sid, SecretKey=skey))
+        kwargs = dict(SecretId=sid, SecretKey=skey, Timeout=COS_TIMEOUT)
+        if COS_ENDPOINT:
+            kwargs["Endpoint"] = COS_ENDPOINT  # 全球加速域名, 不传 region
+        else:
+            kwargs["Region"] = REGION
+            kwargs["EnableOldDomain"] = False       # 用 tencentcos.cn 新域名
+            kwargs["EnableInternalDomain"] = False  # 关内网域名(公网访问必须关)
+        _cos = CosS3Client(CosConfig(**kwargs))
     return _cos
 
 
 def cos_upload(key, data, content_type=None):
+    """上传到 COS, 带重试(跨境网络不稳)。返回对外访问地址"""
     kwargs = {"Bucket": BUCKET, "Key": key, "Body": data}
     if content_type:
         kwargs["ContentType"] = content_type
-    cos_client().put_object(**kwargs)
-    log("COS 上传 %s (%d 字节) -> %s/%s" % (key, len(data), COS_BASE, key))
-    return COS_BASE + "/" + key
+    last = None
+    for attempt in range(1, 4):
+        try:
+            cos_client().put_object(**kwargs)
+            log("COS 上传 %s (%d 字节) -> %s/%s" % (key, len(data), COS_BASE, key))
+            return COS_BASE + "/" + key
+        except Exception as e:
+            last = e
+            log("上传 %s 第 %d 次失败: %s" % (key, attempt, e))
+            if attempt < 3:
+                time.sleep(3)
+    raise RuntimeError("上传失败 %s: %s" % (key, last))
 
 
 def mirror(url, cos_key, content_type=None):
