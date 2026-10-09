@@ -45,7 +45,7 @@ https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 
 ## 站点构成
 
-### 自用置顶（7 个直连 CMS 源）
+### 自用置顶（8 个直连 CMS 源）
 
 | 站点 | 接口地址 | 侧重 |
 |---|---|---|
@@ -56,6 +56,7 @@ https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 | 火狐资源 | `https://hhzyapi.com/api.php/provide/vod/` | 动漫 + 儿童 |
 | 非凡备用 | `http://ffzy5.tv/api.php/provide/vod` | 影视备用 |
 | 百度资源 | `https://api.apibdzy.com/api.php/provide/vod/` | 儿童动画 |
+| 非凡影视 | `http://www.ffzy.tv/api.php/provide/vod/` | 影视（非凡镜像） |
 
 ### 每周自动筛选
 
