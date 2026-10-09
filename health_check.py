@@ -33,6 +33,16 @@ def check_collect(api, opt):
         return False, None, False, "api 无响应/返回异常"
     has_list = bool(isinstance(j, dict) and j.get("list"))
     has_cls = bool(isinstance(j, dict) and j.get("class"))
+    if not has_cls:
+        # provide/vod 类源分类走 ac=list, 单独探测一次
+        try:
+            r2 = requests.get(_api_join(api, "ac=list"),
+                              headers=UA, timeout=opt["timeout"])
+            j2 = r2.json()
+            if isinstance(j2, dict) and j2.get("class"):
+                has_cls = True
+        except (requests.RequestException, ValueError):
+            pass
     if not has_list:
         return False, ms, has_cls, "视频列表为空"
     note = "可用" if has_cls else "可用但无分类(首页不显示类目)"

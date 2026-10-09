@@ -45,12 +45,11 @@ https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 
 ## 站点构成
 
-### 自用置顶（8 个直连 CMS 源）
+### 自用置顶（7 个直连 CMS 源）
 
 | 站点 | 接口地址 | 侧重 |
 |---|---|---|
-| 淘片资源（默认首页） | `https://taopianapi.com/cjapi/mc/vod/json.html` | 综合，分类最全 |
-| 量子资源 | `https://cj.lziapi.com/api.php/provide/vod/` | 影视 |
+| 量子资源（默认首页） | `https://cj.lziapi.com/api.php/provide/vod/` | 综合，44 分类最全 |
 | 非凡资源 | `https://cj.ffzyapi.com/api.php/provide/vod/` | 影视 |
 | 天堂资源 | `http://caiji.dyttzyapi.com/api.php/provide/vod/` | 影视 |
 | 360资源 | `https://360zy.com/api.php/provide/vod/` | 影视 |
