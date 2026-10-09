@@ -3,15 +3,6 @@
   "logo": "https://raw.githubusercontent.com/cyao2q/files/master/images/logo.jpg",
   "sites": [
     {
-      "key": "tpzy",
-      "name": "淘片资源",
-      "type": 1,
-      "api": "https://taopianapi.com/cjapi/mc/vod/json.html",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
       "key": "lzzy",
       "name": "量子资源",
       "type": 1,
@@ -75,39 +66,13 @@
       "filterable": 1
     },
     {
-      "key": "WexshuangzixingGuard",
-      "name": "💓双星┃4K💓",
-      "type": 3,
-      "api": "csp_WexshuangzixingGuard",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
-      "key": "文采秒播",
-      "name": "文采秒播",
-      "type": 3,
-      "api": "csp_JpysGuard",
-      "timeout": 10,
-      "playerType": 2,
+      "key": "ffzytv",
+      "name": "非凡影视",
+      "type": 1,
+      "api": "http://www.ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "Wexmuougg",
-      "name": "💓木偶┃4K💓",
-      "type": 3,
-      "api": "csp_WexmuouggGuard",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
-      "key": "賤賤",
-      "name": "💥賤片┃p2p💥",
-      "type": 3,
-      "api": "csp_WexJianpianGuard",
-      "searchable": 1,
-      "changeable": 1
+      "filterable": 1
     },
     {
       "key": "WexduoduoziyuanGuard",
@@ -132,14 +97,13 @@
       }
     },
     {
-      "key": "Douban",
-      "name": "🐮【免费分享】🐮",
+      "key": "Wexnullname",
+      "name": "💓无名┃4K💓",
       "type": 3,
-      "api": "csp_DoubanGuard",
-      "searchable": 0,
-      "quickSearch": 0,
-      "filterable": 0,
-      "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20260414181247-ae51abfbfe.txt"
+      "api": "csp_WexnullnameGuard",
+      "searchable": 1,
+      "changeable": 1,
+      "timeout": 120
     },
     {
       "key": "哔哩歌曲",
@@ -153,6 +117,43 @@
       "ext": {
         "json": "./json/biliych.json"
       }
+    },
+    {
+      "key": "Wexpan123ziyuanGuard",
+      "name": "💓123┃4K💓",
+      "type": 3,
+      "api": "csp_Wexpan123ziyuanGuard",
+      "searchable": 1,
+      "changeable": 1
+    },
+    {
+      "key": "哔哩明星",
+      "name": "哔哩明星",
+      "type": 3,
+      "api": "csp_BiliGuard",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 1,
+      "changeable": 0,
+      "ext": {
+        "json": "./json/bilimx.json"
+      }
+    },
+    {
+      "key": "玩偶",
+      "name": "💓‍玩偶┃4K💓‍",
+      "type": 3,
+      "api": "csp_WoggGuard",
+      "searchable": 1,
+      "changeable": 1
+    },
+    {
+      "key": "csp_Nmys",
+      "name": "🎇伯伯┃秒播🎇",
+      "type": 3,
+      "api": "csp_WexNmysGuard",
+      "searchable": 1,
+      "changeable": 1
     }
   ],
   "parses": [
