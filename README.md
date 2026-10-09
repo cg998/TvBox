@@ -12,16 +12,16 @@
 蜂蜜影视 → 设置 → 点播 → 配置地址，填入：
 
 ```
+https://tvbox-202610-1503022424.cos.ap-guangzhou.myqcloud.com/my_interface.json
+```
+
+> 说明：主地址走腾讯云 COS。爬虫源所需的 spider jar（Bee.jar）、App 图标、哔哩扩展 json 都已由流水线自动镜像到 COS，因此秒播/爬虫类站点在国内也能正常加载（不再依赖被墙的 raw.githubusercontent）。
+
+备用地址（主地址失效时，直连源可用、爬虫源不可用）：
+
+```
 https://cdn.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 ```
-
-备用地址（主地址失效时）：
-
-```
-https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
-```
-
-> 说明：不使用 `raw.githubusercontent.com` 直连，因其在国内网络不稳定。
 
 ## 自动维护流水线
 
@@ -29,6 +29,7 @@ https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 |---|---|---|
 | 每日健康检查 | 每天 05:20（北京） | 只体检接口内现有站点：挂了的降级到末尾，连续挂 3 天剔除；保证首页默认源存活且分类齐全，挂了自动顶最佳存活源上去。全健康时零提交 |
 | 每周全量筛选 | 每周日 09:20（北京）+ 可手动 | 从 9 个上游种子拉新源 → 解密 → 关键词过滤 → 实测/高清探测 → 去重 → 自用 8 源置顶 + 筛选源，输出 `dist/my_interface.json` |
+| 部署到 COS | 随上面两步自动执行 | 把 jar / 图标 / 扩展 json 镜像到腾讯云 COS，重写接口里的被墙地址，上传最终接口到 COS |
 
 ## 文件说明
 
@@ -39,7 +40,8 @@ https://fastly.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 | `config.json` | 流水线参数（站点上限 30、秒播上限 8、上游种子、关键词过滤） |
 | `filter_sources.py` | 每周全量筛选脚本 |
 | `health_check.py` | 每日健康检查脚本 |
-| `.github/workflows/` | 两个定时任务的调度 |
+| `deploy_cos.py` | 部署脚本：镜像 jar/图标/扩展 json 到 COS 并上传接口 |
+| `.github/workflows/` | 定时任务调度 |
 | `tv.json` | 静态兜底接口（Actions 万一挂了，电视端可手动切回这个地址） |
 | `test_tv.py` | 手动自测工具（测 `tv.json`） |
 
