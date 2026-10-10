@@ -1,12 +1,31 @@
 {
   "seeds": [
-    { "name": "tvbox.org自动合并", "url": "https://raw.githubusercontent.com/TVboxorg/Tvbox/main/dist/official.json" }
+    { "name": "tvbox.org自动合并", "url": "https://raw.githubusercontent.com/TVboxorg/Tvbox/main/dist/official.json" },
+    { "name": "哈基米(聚合多直连)", "url": "https://17264.kstore.space/哈基米.png" },
+    { "name": "东篱线路", "url": "https://raw.githubusercontent.com/chitue/dongliTV/main/api.json" },
+    { "name": "俊佬top98", "url": "http://home.jundie.top:81/top98.json" }
   ],
+  "homepage": {
+    "_说明": "默认首页源(App 打开显示的站)。preferred_class 填某个秒播类(如 Duboku), 命中则顶到 sites[0]; 留空则用 my_sites.json 第一个(=量子)。该源不可用时 health_check 回退到 fallback_key。",
+    "preferred_class": "",
+    "fallback_key": "lzzy"
+  },
   "spider_pack": {
     "_说明": "A方案: 从明文jar上游拉取秒播/爬虫源, 按白名单裁剪家庭向站点, 托管到自有COS。每次运行自动跟随上游更新; jar 若被改成加密版会自动停用本环节。",
     "enabled": true,
     "interface": "https://raw.githubusercontent.com/qist/tvbox/master/jsm.json",
     "jar": "",
+    "hosts_file": "spider_hosts.json",
+    "force_drop": [],
+    "force_keep": [],
+    "upstream_probe": {
+      "_说明": "对白名单类做上游探活(第①项): 全部域名不可达->剔除; 可达但最快延迟>slow_ms->降级到站点末尾。若 dead 占比 > unreliable_dead_ratio(说明探针所在网络整体不通, 如 CI 在境外), 本轮只记录不淘汰。跑在境外节点时结果仅供参考, 可疑的类名可写进 force_keep/force_drop 人工覆盖。",
+      "enabled": true,
+      "timeout": 8,
+      "slow_ms": 4000,
+      "drop_dead": true,
+      "unreliable_dead_ratio": 0.6
+    },
     "allow_classes": [
       "TongQu", "TuXiaoBei", "BeiLeHu",
       "Duboku", "New6v", "Web1905", "Gz360", "MeijuMi", "ShuangXing", "Yidong4K", "AppLY", "YST",

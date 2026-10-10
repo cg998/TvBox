@@ -387,6 +387,19 @@ def main():
     elif pack_cfg.get("enabled"):
         log("未找到秒播源包(%s), 本次仅直连源" % pack_path)
 
+    # 首页可配置(第②项): 若指定首选类且本次命中, 顶到 sites[0]; 否则维持 my_sites 第一个(=量子)
+    # 挂了自动回退的逻辑在 health_check.py(fallback_key)。
+    hp = cfg.get("homepage", {})
+    pref = (hp.get("preferred_class") or "").strip()
+    if pref:
+        idx = next((i for i, s in enumerate(out["sites"]) if s.get("api") == "csp_" + pref), None)
+        if idx is None:
+            log("首页首选类 csp_%s 未在本次站点中, 维持默认首页(%s)" % (pref, out["sites"][0].get("name")))
+        elif idx > 0:
+            s = out["sites"].pop(idx)
+            out["sites"].insert(0, s)
+            log("首页已切换为 [%s] (csp_%s)" % (s.get("name"), pref))
+
     for k in ("parses", "flags", "ijk", "lives", "ads", "rules", "doh"):
         if base.get(k):
             out[k] = base[k]

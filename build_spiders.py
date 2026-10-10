@@ -6,7 +6,8 @@
   1. 从上游(默认 qist/tvbox)拉取 *明文* 爬虫 jar 与它的接口
   2. 校验 jar 未加密(无 ftyguard/native .so 解密层) —— 加密则本次跳过
   3. 按 allow_classes 白名单(且该类真实存在于 jar)裁剪出家庭向 csp 站点
-  4. 产出 dist/spider_pack.json, 交给 filter_sources.py 合并进主接口
+  4. 上游探活(可选): 依 spider_hosts.json 的「类 -> 真实上游域名」剔除已挂站、降级超慢站
+  5. 产出 dist/spider_pack.json, 交给 filter_sources.py 合并进主接口
   之后由 deploy_cos.py 把 jar 镜像到自有 COS, 并把接口里的 spider 指向 COS。
 
 为什么这样设计(可维护性):
@@ -26,6 +27,7 @@ import re
 import sys
 import time
 import zipfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urljoin
 
 import requests
@@ -179,6 +181,125 @@ def inspect_jar(jar_bytes):
     return (len(guard) > 0, guard, blob, url_count)
 
 
+# ---------- 上游探活(第①项: 秒播源体检淘汰) ----------
+# 白名单是按「类别」选的, 没按「质量/存活」选, 所以会混进已挂/超慢的站。
+# 这里用 spider_hosts.json(反编译 jar 得到的「类 -> 真实上游域名」)对各站点做探活:
+#   - 全部域名不可达 -> dead   -> 剔除(除非在 force_keep)
+#   - 可达但最快延迟 > slow_ms -> slow -> 降级(排到站点末尾, 不影响其它类别顺序)
+#   - spider_hosts.json 无该类的域名 -> unknown -> 保留
+# 安全阀: 若 dead 占比过高(说明探针所在网络整体不通, 如同 CI 在境外), 本轮不做淘汰, 仅记录。
+
+def load_host_map(base_dir, pack_cfg):
+    rel = pack_cfg.get("hosts_file", "spider_hosts.json")
+    p = rel if os.path.isabs(rel) else os.path.join(base_dir, rel)
+    if not os.path.exists(p):
+        log("未找到上游域名表 %s, 跳过探活" % p)
+        return {}
+    try:
+        with open(p, encoding="utf-8") as f:
+            return json.load(f).get("classes") or {}
+    except (OSError, json.JSONDecodeError) as e:
+        log("上游域名表读取失败(%s), 跳过探活" % e)
+        return {}
+
+
+def _probe_one_host(host, timeout):
+    """探测单个域名根地址。返回 (alive:bool, ms|None)"""
+    for scheme in ("https", "http"):
+        t0 = time.time()
+        try:
+            s = requests.Session()
+            s.trust_env = False
+            r = s.get("%s://%s" % (scheme, host), headers=UA, timeout=(5, timeout), allow_redirects=True)
+            ms = int((time.time() - t0) * 1000)
+            if r.status_code < 500:          # 2xx/3xx/4xx 均视为「站点在线」
+                return True, ms
+        except requests.RequestException:
+            continue
+    return False, None
+
+
+def probe_classes(classes, host_map, timeout, workers=10):
+    """并发探测每个类别的上游域名。返回 {cls: {"alive","ms","hosts","verdict"}}"""
+    out, jobs = {}, {}
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for cls in classes:
+            hosts = [h for h in (host_map.get(cls) or []) if h][:4]
+            if not hosts:
+                out[cls] = {"alive": None, "ms": None, "hosts": [], "verdict": "unknown"}
+                continue
+            for h in hosts:
+                jobs[ex.submit(_probe_one_host, h, timeout)] = cls
+        acc = {}
+        for fut in as_completed(jobs):
+            cls = jobs[fut]
+            try:
+                alive, ms = fut.result()
+            except Exception:
+                alive, ms = False, None
+            a = acc.setdefault(cls, {"alive": False, "ms": None, "hosts": []})
+            if alive:
+                a["alive"] = True
+                if ms is not None and (a["ms"] is None or ms < a["ms"]):
+                    a["ms"] = ms
+        for cls in classes:
+            if cls in out:
+                continue
+            a = acc.get(cls, {"alive": False, "ms": None, "hosts": []})
+            a["hosts"] = [h for h in (host_map.get(cls) or []) if h][:4]
+            a["verdict"] = "alive" if a["alive"] else "dead"
+            out[cls] = a
+    return out
+
+
+def apply_probe(sites, pack_cfg, base_dir, out_path):
+    """对候选站点做上游探活并淘汰/降级。返回 (sites, slow_set, probe_meta)"""
+    probe_cfg = pack_cfg.get("upstream_probe", {})
+    if not probe_cfg.get("enabled", False):
+        return sites, set(), {}
+    host_map = load_host_map(base_dir, pack_cfg)
+    if not host_map:
+        return sites, set(), {}
+
+    classes = sorted({s["api"][4:] for s in sites})
+    log("上游探活: %d 个类别 ..." % len(classes))
+    res = probe_classes(classes, host_map, probe_cfg.get("timeout", 8))
+    dead = [c for c in classes if res.get(c, {}).get("verdict") == "dead"]
+    alive = [c for c in classes if res.get(c, {}).get("verdict") == "alive"]
+    unknown = [c for c in classes if res.get(c, {}).get("verdict") == "unknown"]
+    meta = {"alive": alive, "dead": dead, "unknown": unknown,
+            "detail": {c: {"v": res[c]["verdict"], "ms": res[c]["ms"]} for c in classes},
+            "checked_at": time.strftime("%Y-%m-%d %H:%M:%S")}
+
+    ratio = (len(dead) / float(len(classes))) if classes else 0.0
+    if ratio > probe_cfg.get("unreliable_dead_ratio", 0.6):
+        log("探针不可靠(dead %d/%d 超过阈值 %.0f%%), 本轮不做淘汰/降级, 仅记录" % (
+            len(dead), len(classes), probe_cfg.get("unreliable_dead_ratio", 0.6) * 100))
+        meta["unreliable"] = True
+        return sites, set(), meta
+
+    force_keep = set(pack_cfg.get("force_keep", []))
+    force_drop = set(pack_cfg.get("force_drop", []))
+    if not probe_cfg.get("drop_dead", True):
+        drop = set(force_drop)
+    else:
+        drop = (set(dead) - force_keep) | force_drop
+    slow_ms = probe_cfg.get("slow_ms", 4000)
+    slow_cls = {c for c in classes if res.get(c, {}).get("verdict") == "alive"
+                and res[c].get("ms") is not None and res[c]["ms"] > slow_ms}
+
+    kept = [s for s in sites if s["api"][4:] not in drop]
+    meta["dropped"] = sorted({s["api"][4:] for s in sites if s["api"][4:] in drop})
+    meta["slow"] = sorted(slow_cls)
+    log("探活淘汰 %d 个: %s" % (len(meta["dropped"]), ", ".join(meta["dropped"]) or "无"))
+    log("探活降级(慢>%dms) %d 个: %s" % (slow_ms, len(slow_cls), ", ".join(sorted(slow_cls)) or "无"))
+    if unknown:
+        log("无上游域名映射(保留) %d 个: %s" % (len(unknown), ", ".join(unknown)))
+    if not kept:
+        _die_soft(base_dir, out_path, "上游探活后 0 个可用站点")
+    return kept, slow_cls, meta
+
+
 # ---------- 主流程 ----------
 
 def _die_soft(base_dir, out_path, reason):
@@ -267,9 +388,12 @@ def main():
         if cls.encode() not in dex_blob:
             dropped_absent.append(cls); continue
         sites.append(dict(s))
-    # 按 allow_classes 的书写顺序排优先级, 再按 max_sites 截断(优先保留白名单里靠前的类别)
+    # 3.5 上游探活: 剔除已挂站、降级超慢站(第①项)
+    sites, slow_cls, probe_meta = apply_probe(sites, pack_cfg, base_dir, out_path)
+
+    # 按 allow_classes 的书写顺序排优先级(慢站降到末尾), 再按 max_sites 截断(优先保留白名单里靠前的类别)
     order = {c: i for i, c in enumerate(pack_cfg.get("allow_classes", []))}
-    sites.sort(key=lambda s: order.get(s["api"][4:], 999))
+    sites.sort(key=lambda s: (1 if s["api"][4:] in slow_cls else 0, order.get(s["api"][4:], 999)))
     kept_all = len(sites)
     sites = sites[:max_sites]
 
@@ -290,6 +414,7 @@ def main():
             "matched_all": kept_all,
             "dropped_absent_in_jar": sorted(set(dropped_absent)),
             "dropped_denied": sorted(set(dropped_denied)),
+            "probe": probe_meta,
             "built_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         },
     }

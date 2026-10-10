@@ -6,9 +6,11 @@
 - drpy:  脚本地址可达
 - csp_:  离线无法实测, 仅校验 jar/ext 链接可达, 默认视为存活
 动作: 挂了的降级到末尾; 连续挂 fail_threshold 天剔除; 保证 sites[0](首页默认源)存活且分类齐全,
-      否则自动把最佳存活源顶到第一位(保证 App 打开时电影/连续剧/综艺等分类正常显示)。
-      例外: my_sites.json 的自用置顶源只体检、不计数、不降级、不剔除 —— 本脚本常跑在境外
-      节点, 对国内直连源的实测结果不可靠, 若据此自动删源会误伤; 自用源真的挂了应人工更换。
+      否则按 config.homepage.fallback_key 回退(默认量子), 再兜底选最快存活源
+      (保证 App 打开时电影/连续剧/综艺等分类正常显示)。
+      例外: my_sites.json 的自用置顶源、以及 config.homepage.preferred_class 选出的首页秒播源,
+      只体检、不计数、不降级、不剔除 —— 本脚本常跑在境外节点, 对国内源的实测结果不可靠,
+      若据此自动删源会误伤; 精选源真挂了应人工更换。
       首页默认源若为自用源, 也不自动替换(宁可留精选源, 也不交给境外节点判断)。
 运行: python health_check.py [config.json]
 """
@@ -110,6 +112,18 @@ def main():
         except (json.JSONDecodeError, OSError):
             pass
 
+    pinned_set = set(pinned)
+    # 首页配置(第②项): preferred_class 选出的秒播源视为「精选」——不计数/不剔除,
+    # 避免境外节点的误判把它删掉; 真挂了应人工更换。fallback_key 是首页不可用时的回退源。
+    hp = cfg.get("homepage", {}) or {}
+    fb_key = hp.get("fallback_key")
+    pref_cls = (hp.get("preferred_class") or "").strip()
+    protected = set(pinned_set)
+    if pref_cls:
+        pk = next((s.get("key") for s in sites if s.get("api") == "csp_" + pref_cls), None)
+        if pk:
+            protected.add(pk)
+
     # 并发体检
     results = []
     with ThreadPoolExecutor(max_workers=opt.get("workers", 16)) as ex:
@@ -119,14 +133,13 @@ def main():
     by_key = {dedup_key(r["site"]): r for r in results}
 
     # 更新连续失败计数(只对可实测源; 健康的源不记录, 全部健康时 state 无变化, 当天不产生提交)
-    # 自用置顶源(my_sites.json)不参与计数: 境外节点对国内源实测不可靠, 记录只会误判+产生提交噪音。
-    pinned_set = set(pinned)
+    # 自用置顶源与首页精选源不参与计数: 境外节点对国内源实测不可靠, 记录只会误判+产生提交噪音。
     for r in results:
         if r["ok"] is None:
             continue
         k = dedup_key(r["site"])
-        if r["site"].get("key") in pinned_set:
-            state.pop(k, None)  # 自用源不计数, 并清掉历史可能残留的误判记录
+        if r["site"].get("key") in protected:
+            state.pop(k, None)  # 精选源不计数, 并清掉历史可能残留的误判记录
             continue
         if r["ok"]:
             state.pop(k, None)
@@ -143,8 +156,8 @@ def main():
         k = dedup_key(s)
         r = by_key[k]
         fails = state.get(k, {}).get("fails", 0)
-        if s.get("key") in pinned_set:
-            # 自用源: 只体检不剔除/不降级, 始终保持原位
+        if s.get("key") in protected:
+            # 精选源(自用置顶 / 首页首选): 只体检不剔除/不降级, 始终保持原位
             alive.append((s, r))
         elif r["ok"] is False and fails >= threshold:
             removed.append(r)
@@ -158,20 +171,26 @@ def main():
     def homepage_ok(r):
         return r["ok"] is not False and (r["kind"] != "collect" or r["classes"])
     if new_sites:
-        first_r = by_key[dedup_key(new_sites[0])]
-        if new_sites[0].get("key") in pinned_set:
+        first = new_sites[0]
+        first_r = by_key[dedup_key(first)]
+        if first.get("key") in pinned_set:
             pass  # 首页是自用置顶源: 不替换(境外实测不可靠, 保留人工精选)
         elif not homepage_ok(first_r):
             cand = None
-            pinned_alive = [(s, r) for s, r in alive if s.get("key") in pinned and homepage_ok(r)]
-            pool = pinned_alive or [(s, r) for s, r in alive if homepage_ok(r)]
-            if pool:
-                cand = min(pool, key=lambda sr: (sr[1]["ms"] is None, sr[1]["ms"] or 9999))
-            if cand:
+            # 1) 优先回退到配置的 fallback_key(如量子): 不依赖本次探针结果, 避免境外节点误判
+            if fb_key:
+                cand = next(((s, r) for s, r in alive if s.get("key") == fb_key), None)
+            # 2) 否则挑最快且可作首页的存活源(优先自用源)
+            if cand is None:
+                pool = [(s, r) for s, r in alive if s.get("key") in pinned and homepage_ok(r)] \
+                    or [(s, r) for s, r in alive if homepage_ok(r)]
+                if pool:
+                    cand = min(pool, key=lambda sr: (sr[1]["ms"] is None, sr[1]["ms"] or 9999))
+            if cand is not None and cand[0] is not first:
                 new_sites.remove(cand[0])
                 new_sites.insert(0, cand[0])
                 cand[1]["note"] += " [已顶到首页位]"
-                log("首页源 [%s] 不可用, 已顶上 [%s]" % (first_r["name"], cand[1]["name"]))
+                log("首页源 [%s] 不可用, 已回退到 [%s]" % (first_r["name"], cand[1]["name"]))
             else:
                 log("警告: 没有可用作首页的存活源!")
 
@@ -191,8 +210,9 @@ def main():
     order = {dedup_key(s): i for i, s in enumerate(new_sites)}
     for r in sorted(results, key=lambda r: order.get(dedup_key(r["site"]), 999)):
         st = state.get(dedup_key(r["site"]), {})
-        if r["site"].get("key") in pinned_set:
-            status = "自用(免剔除)" if r["ok"] is not False else "自用-本次未探通(保留)"
+        if r["site"].get("key") in protected:
+            tag = "自用" if r["site"].get("key") in pinned_set else "首页精选"
+            status = "%s(免剔除)" % tag if r["ok"] is not False else "%s-本次未探通(保留)" % tag
         else:
             status = "存活" if r["ok"] is not False else ("已剔除" if st.get("fails", 0) >= threshold else "降级")
         cls = {True: "有", False: "无", None: "-"}[r["classes"]]
