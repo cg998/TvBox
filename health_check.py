@@ -6,7 +6,10 @@
 - drpy:  脚本地址可达
 - csp_:  离线无法实测, 仅校验 jar/ext 链接可达, 默认视为存活
 动作: 挂了的降级到末尾; 连续挂 fail_threshold 天剔除; 保证 sites[0](首页默认源)存活且分类齐全,
-      否则自动把最佳存活源顶到第一位(保证 App 打开时电影/连续剧/综艺等分类正常显示)
+      否则自动把最佳存活源顶到第一位(保证 App 打开时电影/连续剧/综艺等分类正常显示)。
+      例外: my_sites.json 的自用置顶源只体检、不计数、不降级、不剔除 —— 本脚本常跑在境外
+      节点, 对国内直连源的实测结果不可靠, 若据此自动删源会误伤; 自用源真的挂了应人工更换。
+      首页默认源若为自用源, 也不自动替换(宁可留精选源, 也不交给境外节点判断)。
 运行: python health_check.py [config.json]
 """
 import json
@@ -116,8 +119,10 @@ def main():
     by_key = {dedup_key(r["site"]): r for r in results}
 
     # 更新连续失败计数(只对可实测源; 健康的源不记录, 全部健康时 state 无变化, 当天不产生提交)
+    # 自用置顶源(my_sites.json)不参与计数: 境外节点对国内源实测不可靠, 记录只会误判+产生提交噪音。
+    pinned_set = set(pinned)
     for r in results:
-        if r["ok"] is None:
+        if r["ok"] is None or r["site"].get("key") in pinned_set:
             continue
         k = dedup_key(r["site"])
         if r["ok"]:
@@ -135,7 +140,10 @@ def main():
         k = dedup_key(s)
         r = by_key[k]
         fails = state.get(k, {}).get("fails", 0)
-        if r["ok"] is False and fails >= threshold:
+        if s.get("key") in pinned_set:
+            # 自用源: 只体检不剔除/不降级, 始终保持原位
+            alive.append((s, r))
+        elif r["ok"] is False and fails >= threshold:
             removed.append(r)
         elif r["ok"] is False:
             demoted.append(r)
@@ -148,7 +156,9 @@ def main():
         return r["ok"] is not False and (r["kind"] != "collect" or r["classes"])
     if new_sites:
         first_r = by_key[dedup_key(new_sites[0])]
-        if not homepage_ok(first_r):
+        if new_sites[0].get("key") in pinned_set:
+            pass  # 首页是自用置顶源: 不替换(境外实测不可靠, 保留人工精选)
+        elif not homepage_ok(first_r):
             cand = None
             pinned_alive = [(s, r) for s, r in alive if s.get("key") in pinned and homepage_ok(r)]
             pool = pinned_alive or [(s, r) for s, r in alive if homepage_ok(r)]
@@ -178,7 +188,10 @@ def main():
     order = {dedup_key(s): i for i, s in enumerate(new_sites)}
     for r in sorted(results, key=lambda r: order.get(dedup_key(r["site"]), 999)):
         st = state.get(dedup_key(r["site"]), {})
-        status = "存活" if r["ok"] is not False else ("已剔除" if st.get("fails", 0) >= threshold else "降级")
+        if r["site"].get("key") in pinned_set:
+            status = "自用(免剔除)" if r["ok"] is not False else "自用-本次未探通(保留)"
+        else:
+            status = "存活" if r["ok"] is not False else ("已剔除" if st.get("fails", 0) >= threshold else "降级")
         cls = {True: "有", False: "无", None: "-"}[r["classes"]]
         lines.append("| %s | %s | %s | %s | %s | %d | %s |" % (
             r["name"], r["kind"], status,
