@@ -122,9 +122,12 @@ def main():
     # 自用置顶源(my_sites.json)不参与计数: 境外节点对国内源实测不可靠, 记录只会误判+产生提交噪音。
     pinned_set = set(pinned)
     for r in results:
-        if r["ok"] is None or r["site"].get("key") in pinned_set:
+        if r["ok"] is None:
             continue
         k = dedup_key(r["site"])
+        if r["site"].get("key") in pinned_set:
+            state.pop(k, None)  # 自用源不计数, 并清掉历史可能残留的误判记录
+            continue
         if r["ok"]:
             state.pop(k, None)
         else:
