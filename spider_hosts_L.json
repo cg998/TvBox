@@ -1,0 +1,319 @@
+{
+  "_说明": "L佬线路.jar 反编译所得「爬虫类 -> 真实上游域名」, 供 build_spiders 做上游探活。",
+  "classes": {
+    "AList": [
+      "115.com",
+      "baidupcs.com"
+    ],
+    "Ali": [
+      "www.alipan.com",
+      "www.aliyundrive.com"
+    ],
+    "AppYsV2": [
+      "973973.xyz",
+      "iopenyun.com",
+      "tv.bulei.cc",
+      "vod.9e03.com",
+      "weetai.cn",
+      "www.1010dy.cc",
+      "www.bilibili.com",
+      "www.dijiaxia.com",
+      "www.mgtv.com",
+      "zjj.life"
+    ],
+    "BiXin": [
+      "www.bixbiy.com"
+    ],
+    "Bili": [
+      "api.bilibili.com",
+      "www.bilibili.com"
+    ],
+    "ChangZhang": [
+      "www.czys.pro"
+    ],
+    "DaGongRen": [
+      "dagongren1.com"
+    ],
+    "Ddrk": [
+      "ddys.pro",
+      "v.ddys.pro"
+    ],
+    "DiDa": [
+      "www.didahd.pro"
+    ],
+    "DianYingYunJi": [
+      "dyyjpro.com"
+    ],
+    "Dm84": [
+      "dm84.tv"
+    ],
+    "Doll": [
+      "afcdn.net",
+      "hongkongdollvideo.com"
+    ],
+    "Douban": [
+      "api.douban.com",
+      "frodo.douban.com",
+      "servicewechat.com"
+    ],
+    "DuoDuo": [
+      "123.666291.xyz"
+    ],
+    "Eighteen": [
+      "afcdn.net",
+      "mjv002.com"
+    ],
+    "FirstAid": [
+      "m.youlai.cn"
+    ],
+    "Hanime": [
+      "hanime1.me"
+    ],
+    "Ikanbot": [
+      "v.ikanbot.com"
+    ],
+    "Introduce": [
+      "api.extscreen.com",
+      "test-streams.mux.dev"
+    ],
+    "Jianpian": [
+      "ev5356.970xw.com",
+      "swrdsfeiujo25sw.cc"
+    ],
+    "JustLive": [
+      "live.yj1211.work"
+    ],
+    "Kanqiu": [
+      "pic.imgdb.cn"
+    ],
+    "KuaKeBa": [
+      "www.kuakeba.top"
+    ],
+    "KuaKeS": [
+      "kuakes.com"
+    ],
+    "Kugou": [
+      "www.kugou.com"
+    ],
+    "LeiJing": [
+      "leijing1.com"
+    ],
+    "Miss": [
+      "missav.com"
+    ],
+    "Mogg": [
+      "woog.nxog.eu.org"
+    ],
+    "NCat": [
+      "kekys.com",
+      "vres.wbadl.cn",
+      "www.ncat3.app"
+    ],
+    "NaBi": [
+      "duopan.fun"
+    ],
+    "PTT": [
+      "ptt.red"
+    ],
+    "Pan123": [
+      "www.123684.com"
+    ],
+    "PanSearch": [
+      "www.pansearch.me"
+    ],
+    "PanSou": [
+      "www.alipansou.com"
+    ],
+    "PanTa": [
+      "www.91panta.cn"
+    ],
+    "QiLeSo": [
+      "www.qileso.com"
+    ],
+    "Qupans": [
+      "fs-im-kefu.7moor-fs1.com",
+      "www.qupanshe.com"
+    ],
+    "QxiTv": [
+      "www.7xi.tv"
+    ],
+    "ReBoYingShi": [
+      "reboys.cn"
+    ],
+    "SeedHub": [
+      "seedhub.pro"
+    ],
+    "Star": [
+      "aws.ulivetv.net",
+      "www.histar.tv"
+    ],
+    "TeXiaFan": [
+      "www.xn--ghqy10g1w0a.xyz"
+    ],
+    "Tg123Search": [
+      "tgsou.252035.xyz"
+    ],
+    "Tg189Search": [
+      "tgsou.252035.xyz"
+    ],
+    "TgQuarkSearch": [
+      "tgsou.252035.xyz"
+    ],
+    "TgSearch": [
+      "tg.252035.xyz"
+    ],
+    "TgSearch123": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgSearch139": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgSearch189": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgSearchBaidu": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgSearchMagnet": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgSearchQuark": [
+      "139.com",
+      "189.cn",
+      "baidu.com"
+    ],
+    "TgbaiduSearch": [
+      "tgsou.252035.xyz"
+    ],
+    "TianYiSo": [
+      "www.tianyiso.com"
+    ],
+    "TvDy": [
+      "www.tvdy.xyz"
+    ],
+    "UpYun": [
+      "pic.imgdb.cn",
+      "upapi.juapp9.com"
+    ],
+    "W55Movie": [
+      "player.ddzyku.com"
+    ],
+    "Wogg": [
+      "wogg.xxooo.cf"
+    ],
+    "Xb6v": [
+      "www.xb6v.com"
+    ],
+    "XiaoMi": [
+      "milvdou.fun"
+    ],
+    "XiaoZhiTiao": [
+      "gitcafe.net",
+      "www.aliyundrive.com"
+    ],
+    "XuanFeng": [
+      "miao101.com"
+    ],
+    "YiDongYun": [
+      "caiyun.139.com",
+      "share-kd-njs.yun.139.com",
+      "yun.139.com"
+    ],
+    "YiSo": [
+      "yiso.fun"
+    ],
+    "Ysj": [
+      "www.dmmiku.com"
+    ],
+    "YunPanBa": [
+      "yunpan8.cc"
+    ],
+    "YunPanZiYuan": [
+      "res.yunpan.win"
+    ],
+    "Zhaozy": [
+      "www.aliyundrive.com",
+      "zhaoziyuan1.cc"
+    ],
+    "ZhiZhen": [
+      "mihdr.top"
+    ],
+    "Zxzj": [
+      "zxzj.shop"
+    ],
+    "merge/E/A": [
+      "open.e.189.cn",
+      "share-kd-njs.yun.139.com"
+    ],
+    "merge/E/C": [
+      "api.open.uc.cn"
+    ],
+    "merge/E/D": [
+      "su.uc.cn"
+    ],
+    "merge/E/E": [
+      "api.open.uc.cn"
+    ],
+    "merge/E/G": [
+      "pc-api.uc.cn"
+    ],
+    "merge/E/I": [
+      "api.extscreen.com"
+    ],
+    "merge/E/j": [
+      "api.xhofe.top",
+      "open.aliyundrive.com",
+      "user.aliyundrive.com",
+      "www.aliyundrive.com"
+    ],
+    "merge/E/o": [
+      "mbd.baidu.com"
+    ],
+    "merge/E/r": [
+      "su.quark.cn"
+    ],
+    "merge/E/s": [
+      "uop.quark.cn"
+    ],
+    "merge/E/t": [
+      "uop.quark.cn"
+    ],
+    "merge/E/v": [
+      "drive-pc.quark.cn"
+    ],
+    "merge/Q/a": [
+      "api.extscreen.com"
+    ],
+    "merge/X0/a": [
+      "2fwww.123684.com",
+      "login.123pan.com",
+      "www.123684.com"
+    ],
+    "merge/Y/k": [
+      "acfun.cn",
+      "baofeng.com",
+      "bilibili.com",
+      "iqiyi.com",
+      "le.com",
+      "mgtv.com",
+      "pptv.com",
+      "sohu.com",
+      "tudou.com",
+      "v.qq.com",
+      "youku.com"
+    ],
+    "merge/y0/d": [
+      "dispatchers.io"
+    ]
+  }
+}

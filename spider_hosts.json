@@ -1,15 +1,10 @@
 {
-  "_说明": "爬虫类 -> 其真实上游域名(从 qist/tvbox 明文 jar 反编译提取)。供 build_spiders.py 做上游探活: 全死则剔除, 过慢则降级。jar 大改后可重新生成。空列表=未知(不参与淘汰)。",
+  "_说明": "qist_spider.jar 反编译所得「爬虫类 -> 真实上游域名」, 供 build_spiders 做上游探活。",
   "classes": {
     "4KZhinan": [
       "4kzn.cc",
-      "pan.quark.cn"
-    ],
-    "ALLLive": [
-      "127.0.0.1"
-    ],
-    "AiKan": [
-      "43.248.117.123"
+      "div.panel.site",
+      "div.site"
     ],
     "AiPan": [
       "www.aipan.me"
@@ -17,6 +12,9 @@
     "AmuBiliV2": [
       "api.bilibili.com",
       "www.bilibili.com"
+    ],
+    "AppFox": [
+      "juo.one"
     ],
     "AppLY": [
       "fly.daoran.tv",
@@ -27,74 +25,90 @@
       "yzy0916.n0z6fkpuk.com"
     ],
     "AppYs": [
-      "1.117.152.239",
-      "vip.mengx.vip",
-      "www.1010dy.cc",
-      "www.1080kan.cc",
-      "www.dijiaxia.com",
       "1.ruifenglb.com",
+      "api.8d8q.com",
+      "api.iopenyun.com",
       "api.m3u8.tv",
+      "appguapi.lihaoyun.top",
+      "baidu.com",
+      "bilibili.com",
+      "cache.dmtt.xyz",
+      "cache.m3u8.suoyo.cc",
+      "cat.wkfile.com",
+      "diliktv.xyz",
       "dp.duoduozy.com",
+      "duoduozy.com",
+      "f7.pyxddc.com",
+      "fast.rongxingvr.cn",
+      "haokanju1.cc",
+      "hsl.ysgc.xyz",
+      "iopenyun.com",
+      "j.zjj.life",
+      "jhsj.manduhu.com",
+      "jiexi.yunl.cc",
       "jx.banyung.xyz",
       "jx.parwix.com",
       "jx.ysgc.xyz",
+      "kuba.renrenmi.cc",
+      "mgtv.com",
+      "play.tkys.tv",
       "player.duoduozy.com",
+      "ppzhu.vip",
+      "renrenmi.cc",
+      "suoyo.cc",
+      "svip.jhdyw.vip",
+      "svip.jhyun.jx.cn",
       "user.iopenyun.com",
+      "v.jhdyw.vip",
+      "vip.mengx.vip",
+      "weetai.cn",
+      "wkfile.com",
+      "www.1010dy.cc",
+      "www.1080kan.cc",
       "www.6080kan.cc",
       "www.baidu.com",
-      "ysgc.cc"
+      "www.bilibili.com",
+      "www.dijiaxia.com",
+      "www.mgtv.com",
+      "x-n.cc",
+      "ysgc.cc",
+      "zjj.life"
     ],
     "AppYsV2": [
+      "iopenyun.com",
+      "weetai.cn",
       "www.1010dy.cc",
-      "www.dijiaxia.com"
-    ],
-    "B": [
-      "api.extscreen.com",
-      "drive.uc.cn",
-      "img.51shazhu.com",
-      "open-api-drive.uc.cn",
-      "pc-api.uc.cn"
+      "www.dijiaxia.com",
+      "zjj.life"
     ],
     "Baiku": [
-      "api.kuleu.com",
-      "img.51shazhu.com"
+      "api.kuleu.com"
     ],
     "BeiLeHu": [
       "vd.ubestkid.com"
     ],
     "Bili": [
-      "www.w3.org",
       "api.bilibili.com",
-      "img.51shazhu.com",
       "www.bilibili.com"
     ],
     "BiliYS": [
-      "www.w3.org",
       "api.bilibili.com",
       "www.bilibili.com"
     ],
-    "C": [
-      "%s",
-      "login.123pan.com",
-      "www.123pan.com"
-    ],
-    "Config": [
-      "127.0.0.1",
-      "img.51shazhu.com"
-    ],
     "Danmu": [
-      "127.0.0.1",
-      "www.mgtv.com",
       "api.so.360kan.com",
       "danmu.huaqi.pro",
       "danmu.zxz.ee",
       "dm.ruyijx.com",
+      "dm.ruyijx.com?ac=dm&url=",
       "dmku.hls.one",
       "v.qq.com",
       "v.youku.com",
-      "www.iqiyi.com"
+      "www.iqiyi.com",
+      "www.mgtv.com"
     ],
     "Djuu": [
+      "div.me",
       "m.djuu.com"
     ],
     "Douban": [
@@ -120,37 +134,10 @@
     "FirstAid": [
       "m.youlai.cn"
     ],
-    "G": [
-      "luosz.top",
-      "sou.ooil.cn",
-      "account.guangyapan.com",
-      "api.open.uc.cn",
-      "app.guangyapan.com",
-      "broccoli.uc.cn",
-      "drive.uc.cn",
-      "e.dlife.cn",
-      "h5.cloud.189.cn",
-      "pan.baidu.com",
-      "pan.quark.cn",
-      "pan.xunlei.com",
-      "panso.xxmu.top",
-      "passport.aliyundrive.com",
-      "passport.bilibili.com",
-      "so.252035.xyz",
-      "su.quark.cn",
-      "su.uc.cn",
-      "uop.quark.cn",
-      "www.123pan.com",
-      "www.alipan.com",
-      "xluser-ssl.xunlei.com"
-    ],
     "GuiGui": [
       "api.guiguiya.com"
     ],
     "Gulu": [
-      "111.170.58.215",
-      "172.247.189.48",
-      "api.nbyjson.top",
       "co4k.1ljx.com",
       "jf.hxx2023.cc"
     ],
@@ -162,125 +149,64 @@
       "sdapi.e2wu4ht.com"
     ],
     "Hxq": [
+      "51touxiang.com",
       "hxqapi.hiyun.tv",
       "voldn-ser01.51touxiang.com"
     ],
-    "Ikanbot": [
-      "www.douban.com"
-    ],
     "Init": [
+      "oss-v1.wangmeipo.cn",
       "so.252035.xyz"
     ],
-    "J": [
-      "drive-pc.quark.cn",
-      "pan.quark.cn",
-      "uop.quark.cn"
-    ],
     "JianPian": [
-      "dns.alidns.com"
+      "swrdsfeiujo25sw.cc"
     ],
     "Jike": [
-      "api.uuuka.com",
-      "img.51shazhu.com"
+      "alipan.com",
+      "aliyundrive.com",
+      "api.uuuka.com"
     ],
     "Jpys": [
       "www.hkybqufgh.com"
     ],
     "KKPan": [
-      "img.51shazhu.com",
       "www.kkpans.com"
     ],
     "KuLe": [
-      "api.kuleu.com",
-      "img.51shazhu.com"
+      "api.kuleu.com"
     ],
     "Kugou": [
+      "catbox.n13.club",
       "krcs.kugou.com",
       "lyrics.kugou.com",
-      "mobilecdnbj.kugou.com",
-      "catbox.n13.club",
       "m.kugou.com",
+      "mobilecdnbj.kugou.com",
       "www.sq0527.cn"
     ],
     "Kuwo": [
       "img1.kuwo.cn",
-      "wapi.kuwo.cn",
-      "www.kuwo.cn",
       "kuwo.cn",
       "nmobi.kuwo.cn",
-      "search.kuwo.cn"
+      "search.kuwo.cn",
+      "wapi.kuwo.cn",
+      "www.kuwo.cn"
     ],
     "LocalFile": [
       "cc-im-kefu-cos.7moor-fs2.com"
     ],
-    "MeijuMi": [],
     "MiPan": [
-      "img.51shazhu.com",
       "www.mipan.so"
     ],
     "New6v": [
       "www.xb6v.org"
     ],
-    "P": [
-      "img.51shazhu.com",
-      "share-kd-njs.yun.139.com",
-      "yun.139.com"
-    ],
-    "Pan": [
-      "127.0.0.1"
-    ],
     "Pan123": [
-      "images.cnblogs.com",
       "www.123pan.cn",
       "www.123pan.com"
     ],
-    "PanAli": [
-      "images.cnblogs.com",
-      "inews.gtimg.com",
-      "openapi.alipan.com"
-    ],
-    "PanBaidu": [
-      "images.cnblogs.com",
-      "img1.baidu.com"
-    ],
-    "PanGuangya": [
-      "api.guangyapan.com",
-      "images.cnblogs.com"
-    ],
-    "PanQuark": [
-      "images.cnblogs.com",
-      "img.youxiguancha.com"
-    ],
-    "PanSou": [
-      "img.51shazhu.com"
-    ],
-    "PanTianyi": [
-      "cloud.189.cn",
-      "images.cnblogs.com"
-    ],
-    "PanUC": [
-      "image.uc.cn",
-      "images.cnblogs.com"
-    ],
-    "PanWebShare": [
-      "www.douban.com"
-    ],
-    "PanWebShareHJ": [
-      "www.douban.com"
-    ],
-    "PanXunlei": [
-      "api-pan.xunlei.com",
-      "images.cnblogs.com"
-    ],
-    "Proxy": [
-      "127.0.0.1"
-    ],
-    "Q": [
-      "api.open.uc.cn",
-      "broccoli.uc.cn",
-      "drive.uc.cn",
-      "pc-api.uc.cn",
-      "su.uc.cn"
+    "Push": [
+      "alipan.com",
+      "aliyundrive.com",
+      "uc.cn"
     ],
     "QiShui": [
       "api.qishui.com",
@@ -295,29 +221,31 @@
       "www.qtfm.cn"
     ],
     "QuPanSo": [
-      "b.funletu.com",
-      "img.51shazhu.com"
+      "alipan.com",
+      "aliyundrive.com",
+      "b.funletu.com"
     ],
     "RenRen": [
+      "pan.xunlei.com",
+      "www.aliyundrive.com",
       "www.rrdynb.com"
     ],
     "SP360": [
       "api.so.360kan.com",
       "api.web.360kan.com",
       "so.360kan.com",
+      "v.qq.com",
       "v.youku.com",
-      "www.360kan.com"
+      "www.360kan.com",
+      "www.iqiyi.com",
+      "www.mgtv.com"
     ],
     "SaoHuo": [
       "shapp.us"
     ],
-    "SeedHub": [
-      "img.51shazhu.com"
-    ],
     "ShortHaokan": [
       "sv.baidu.com"
     ],
-    "ShortHema": [],
     "ShortQimao": [
       "api-read.qmplaylet.com",
       "api-store.qmplaylet.com",
@@ -334,19 +262,19 @@
       "1.star2.cn"
     ],
     "Sou4K": [
-      "img.51shazhu.com",
       "sou4k.com"
     ],
     "Sports88": [
-      "www.88kanqiu.la",
-      "pic.imgdb.cn"
+      "pic.imgdb.cn",
+      "www.88kanqiu.la"
     ],
     "SportsFeiqiu": [
       "pullcfg.butueaa.cn"
     ],
     "SportsGuazi": [
-      "wjizxlxa2.com",
-      "api.46d5umpk.com"
+      "WJiZxLXA2.com",
+      "api.46d5umpk.com",
+      "wjizxlxa2.com"
     ],
     "SportsKafei": [
       "kafeizhibo.cc"
@@ -359,8 +287,8 @@
       "m.ting15.com"
     ],
     "TingShijie": [
-      "101.43.48.231",
-      "app.365ting.com"
+      "app.365ting.com",
+      "m.i275.com"
     ],
     "TongQu": [
       "gslb.boosj.com",
@@ -368,47 +296,39 @@
       "www.boosj.com"
     ],
     "TuXiaoBei": [
-      "resource-cdn.tuxiaobei.com",
       "www.tuxiaobei.com"
     ],
     "Wallpaper": [
       "uapis.cn"
     ],
     "Web1905": [
+      "2fwww.1905.com",
       "profile.m1905.com",
       "www.1905.com"
     ],
-    "Wogg": [
-      "www.douban.com"
-    ],
-    "X": [
-      "api-pan.xunlei.com",
-      "img.51shazhu.com",
-      "pan.xunlei.com",
-      "xluser-ssl.xunlei.com"
-    ],
     "XBPQ": [
-      "127.0.0.1",
+      "alipansou.com",
+      "aliyundrive.com",
       "ocr.wogg.link",
       "ocr1.wogg.link",
       "www.alipan.com",
-      "www.aliyundrive.com"
+      "www.aliyundrive.com",
+      "zhaoziyuan.la"
     ],
     "XBPQPlay": [
-      "pic.rmb.bdstatic.com"
+      "youtube.com"
     ],
     "XYQHiker": [
       "api.nn.ci",
-      "banyung.pw"
+      "banyung.pw",
+      "m3u8.pw"
     ],
     "XunleiPan": [
-      "api-pan.xunlei.com",
       "pan.xunlei.com",
       "xluser-ssl.xunlei.com"
     ],
     "YGP": [
-      "www.6huo.com",
-      "www.douban.com"
+      "www.6huo.com"
     ],
     "YST": [
       "app.api.btime.com",
@@ -418,144 +338,222 @@
     "Yidong4K": [
       "vidsite.cloudseekr.com"
     ],
-    "a": [
+    "merge/A/j": [
+      "luosz.top",
+      "panso.xxmu.top",
+      "so.252035.xyz",
+      "sou.ooil.cn"
+    ],
+    "merge/A/m": [
+      "api.extscreen.com",
+      "su.uc.cn"
+    ],
+    "merge/A0/ku": [
+      "973973.xyz",
+      "acfun.cn",
+      "banyung.pw",
+      "baofeng.com",
+      "bilibili.com",
+      "iqiyi.com",
+      "le.com",
+      "m.fun.tv",
+      "m3u8.pw",
+      "mgtv.com",
+      "pptv.com",
+      "sohu.com",
+      "tudou.com",
+      "v.qq.com",
+      "vip.1905.com",
+      "www.bilibili.com",
+      "www.fun.tv",
+      "www.ixigua.com",
+      "www.mgtv.com",
+      "www.miguvideo.com",
+      "youku.com"
+    ],
+    "merge/A0/mr": [
       "x.imgs.ovh"
     ],
-    "ad": [
-      "www.w3.org"
+    "merge/A0/vp": [
+      "dispatchers.io"
     ],
-    "b": [
-      "passport.aliyundrive.com"
+    "merge/C0/b/p": [
+      "api-cf.nn.ci",
+      "cat.colamint.club",
+      "open.aliyundrive.com",
+      "www.aliyundrive.com"
     ],
-    "bn": [
-      "www.w3.org"
+    "merge/C0/j/m": [
+      "1905.com",
+      "973973.xyz",
+      "acfun.cn",
+      "baofeng.com",
+      "bilibili.com",
+      "iqiyi.com",
+      "le.com",
+      "mgtv.com",
+      "pptv.com",
+      "sohu.com",
+      "tudou.com",
+      "v.qq.com",
+      "www.bilibili.com",
+      "www.mgtv.com",
+      "youku.com"
     ],
-    "ce": [
-      "github.com"
+    "merge/F/a": [
+      "cn-beijing-data.aliyundrive.net",
+      "dl1-v6.aliyundrive.cloud"
     ],
-    "d": [
+    "merge/FM/b/C": [
+      "login.123pan.com",
+      "www.123pan.com"
+    ],
+    "merge/FM/b/J": [
+      "drive-pc.quark.cn",
+      "uop.quark.cn"
+    ],
+    "merge/FM/b/Q": [
+      "api.open.uc.cn",
+      "broccoli.uc.cn",
+      "pc-api.uc.cn",
+      "su.uc.cn"
+    ],
+    "merge/FM/b/d": [
       "su.quark.cn",
       "uop.quark.cn"
     ],
-    "dj": [
-      "www.w3.org"
-    ],
-    "ed": [
-      "www.w3.org"
-    ],
-    "em": [
-      "www.w3.org"
-    ],
-    "fj": [
-      "github.com"
-    ],
-    "g": [
-      "m.wwgz.cn"
-    ],
-    "gr": [
-      "github.com"
-    ],
-    "h": [
-      "127.0.0.1"
-    ],
-    "i": [
-      "api.aliyundrive.com",
-      "api.oplist.org",
-      "auth.aliyundrive.com",
-      "bj29.api.aliyunpds.com",
-      "img.51shazhu.com",
+    "merge/FM/b/u": [
       "open.aliyundrive.com",
       "user.aliyundrive.com",
       "www.aliyundrive.com"
     ],
-    "ih": [
-      "github.com"
-    ],
-    "j": [
-      "d.pcs.baidu.com",
-      "img.51shazhu.com",
-      "pan.baidu.com",
-      "passport.baidu.com",
-      "sdata.baidupcs.com"
-    ],
-    "k": [
-      "api.nn.ci"
-    ],
-    "ku": [
-      "banyung.pw",
-      "www.bilibili.com"
-    ],
-    "l": [
-      "api.cloud.189.cn",
-      "cloud.189.cn",
-      "img.51shazhu.com",
-      "m.cloud.189.cn",
-      "open.e.189.cn"
-    ],
-    "m": [
-      "img.51shazhu.com",
-      "login.123pan.com",
-      "open-api.123pan.com",
-      "www.123pan.cn",
-      "www.123pan.com"
-    ],
-    "mr": [
+    "merge/FM/e/a": [
       "x.imgs.ovh"
     ],
-    "o": [
-      "passport.aliyundrive.com"
+    "merge/FM/e0/b": [
+      "xmlpull.org"
     ],
-    "oj": [
-      "www.w3.org"
+    "merge/FM/h/c": [
+      "wget.la"
     ],
-    "p": [
-      "api-cf.nn.ci",
-      "api.aliyundrive.com",
-      "auth.aliyundrive.com",
-      "cat.colamint.club",
-      "open.aliyundrive.com",
-      "passport.aliyundrive.com",
-      "www.aliyundrive.com"
+    "merge/FM/o/e": [
+      "973973.xyz",
+      "acfun.cn",
+      "baofeng.com",
+      "bilibili.com",
+      "iqiyi.com",
+      "le.com",
+      "mgtv.com",
+      "pptv.com",
+      "sohu.com",
+      "tudou.com",
+      "v.qq.com",
+      "www.bilibili.com",
+      "www.mgtv.com",
+      "youku.com"
     ],
-    "rd": [
-      "github.com"
+    "merge/FM/o/k": [
+      "api.nn.ci"
     ],
-    "u": [
-      "auth.aliyundrive.com",
-      "open.aliyundrive.com",
-      "passport.aliyundrive.com",
-      "user.aliyundrive.com",
-      "www.aliyundrive.com"
-    ],
-    "w": [
-      "drive-pc.quark.cn",
-      "drive-social-api.quark.cn",
-      "img.51shazhu.com",
-      "pan.quark.cn"
-    ],
-    "x": [
-      "pan.baidu.com",
-      "passport.baidu.com"
-    ],
-    "xg": [
-      "github.com"
-    ],
-    "y": [
+    "merge/FM/o/y": [
       "api.open.uc.cn",
       "broccoli.uc.cn",
-      "drive.uc.cn",
-      "pan.quark.cn",
-      "passport.aliyundrive.com",
       "passport.bilibili.com",
       "su.quark.cn",
       "su.uc.cn",
       "uop.quark.cn"
     ],
-    "z": [
-      "baidu.com$$$分享已失效或其他原因不可用$https"
+    "merge/FM/o/z": [
+      "973973.xyz",
+      "acfun.cn",
+      "baidu.com",
+      "baofeng.com",
+      "bilibili.com",
+      "iqiyi.com",
+      "le.com",
+      "mgtv.com",
+      "pptv.com",
+      "sohu.com",
+      "tudou.com",
+      "v.qq.com",
+      "youku.com"
     ],
-    "zl": [
-      "www.w3.org"
+    "merge/J/b": [
+      "freevideo.zqqds.cn"
+    ],
+    "merge/Z/c": [
+      "xinghe.tv"
+    ],
+    "merge/b/B": [
+      "api.extscreen.com",
+      "pc-api.uc.cn"
+    ],
+    "merge/b/G": [
+      "account.guangyapan.com",
+      "www.guangyapan.com"
+    ],
+    "merge/b/P": [
+      "share-kd-njs.yun.139.com",
+      "yun.139.com"
+    ],
+    "merge/b/X": [
+      "pan.xunlei.com",
+      "xluser-ssl.xunlei.com"
+    ],
+    "merge/b/i": [
+      "2fapi.oplist.org",
+      "api.oplist.org",
+      "bj29.api.aliyunpds.com",
+      "open.aliyundrive.com",
+      "user.aliyundrive.com",
+      "www.aliyundrive.com"
+    ],
+    "merge/b/j": [
+      "d.pcs.baidu.com",
+      "sdata.baidupcs.com"
+    ],
+    "merge/b/l": [
+      "189.cn",
+      "open.e.189.cn"
+    ],
+    "merge/b/m": [
+      "login.123pan.com",
+      "open-api.123pan.com",
+      "www.123pan.cn",
+      "www.123pan.com"
+    ],
+    "merge/b/w": [
+      "drive-pc.quark.cn",
+      "drive-social-api.quark.cn"
+    ],
+    "merge/m/G": [
+      "account.guangyapan.com",
+      "api.bilibili.com",
+      "api.open.uc.cn",
+      "app.guangyapan.com",
+      "broccoli.uc.cn",
+      "drive-pc.quark.cn",
+      "e.dlife.cn",
+      "luosz.top",
+      "open-api.123pan.com",
+      "pan.xunlei.com",
+      "panso.xxmu.top",
+      "passport.bilibili.com",
+      "pc-api.uc.cn",
+      "so.252035.xyz",
+      "sou.ooil.cn",
+      "su.quark.cn",
+      "su.uc.cn",
+      "uop.quark.cn",
+      "user.aliyundrive.com",
+      "www.123pan.com",
+      "www.alipan.com",
+      "www.aliyundrive.com",
+      "www.bilibili.com",
+      "xluser-ssl.xunlei.com"
+    ],
+    "merge/m/g": [
+      "m.wwgz.cn"
     ]
   }
 }

@@ -15,6 +15,22 @@
     "enabled": true,
     "interface": "https://raw.githubusercontent.com/qist/tvbox/master/jsm.json",
     "jar": "",
+    "_extra说明": "额外的明文 jar 上游。主上游的 jar 作为全局 spider; 每个额外上游的 jar 写到它自己站点的 site.jar(每站独立 jar)。FongMi 的 Site 有 jar 字段: 站点自带 jar 优先, 为空才回退全局 spider —— 故多 jar 无需缝合。各额外上游可用自己的 hosts_file / allow_classes / max_sites。",
+    "extra_upstreams": [
+      {
+        "_说明": "L佬线路(明文 jar, 影视站丰富)。接口暴露 44 类, 这里只取家庭向影视/动漫类。",
+        "name": "L佬",
+        "enabled": true,
+        "interface": "https://android.lushunming.qzz.io/json/index.json",
+        "jar": "",
+        "hosts_file": "spider_hosts_L.json",
+        "max_sites": 16,
+        "allow_classes": [
+          "DianYingYunJi", "ReBoYingShi", "NCat", "ChangZhang", "Zxzj", "Xb6v", "Libvio",
+          "Ddrk", "QxiTv", "TvDy", "W55Movie", "DaGongRen", "HkTv", "XuanFeng", "Ysj", "Glod"
+        ]
+      }
+    ],
     "hosts_file": "spider_hosts.json",
     "_force说明": "人工兜底: 探活跑在境外CI, 对国内站偶有误判。force_keep=绝不剔除(国内可达却被判死); force_drop=强制剔除(国内已死却判活)。只影响剔除, 不影响慢速降级。",
     "force_drop": ["SportsKafei"],
@@ -30,6 +46,7 @@
     "allow_classes": [
       "TongQu", "TuXiaoBei", "BeiLeHu",
       "Duboku", "New6v", "Web1905", "Gz360", "MeijuMi", "ShuangXing", "Yidong4K", "AppLY", "YST",
+      "Feiyu", "FengYe", "RenRen", "Jike", "Hxq", "Jpys", "App99", "AppGet", "Czsapp",
       "GuiGui", "ShortWeiguan", "ShortXingya", "ShortQimao", "ShortHaokan", "ShortHema",
       "Sports88", "SportsGuazi", "SportsKafei", "SportsFeiqiu",
       "YGP"
@@ -42,7 +59,7 @@
       "Config", "LocalFile", "Push"
     ],
     "drop_name_keywords": ["网盘", "云盘", "阿里", "夸克", "迅雷", "百度", "听书", "音乐", "有声", "电台", "广播"],
-    "max_sites": 24,
+    "max_sites": 34,
     "output": "dist/spider_pack.json"
   },
   "options": {

@@ -189,8 +189,8 @@ def inspect_jar(jar_bytes):
 #   - spider_hosts.json 无该类的域名 -> unknown -> 保留
 # 安全阀: 若 dead 占比过高(说明探针所在网络整体不通, 如同 CI 在境外), 本轮不做淘汰, 仅记录。
 
-def load_host_map(base_dir, pack_cfg):
-    rel = pack_cfg.get("hosts_file", "spider_hosts.json")
+def load_host_map(base_dir, pack_cfg, hosts_file=None):
+    rel = hosts_file or pack_cfg.get("hosts_file", "spider_hosts.json")
     p = rel if os.path.isabs(rel) else os.path.join(base_dir, rel)
     if not os.path.exists(p):
         log("未找到上游域名表 %s, 跳过探活" % p)
@@ -252,12 +252,12 @@ def probe_classes(classes, host_map, timeout, workers=10):
     return out
 
 
-def apply_probe(sites, pack_cfg, base_dir, out_path):
+def apply_probe(sites, pack_cfg, base_dir, out_path, hosts_file=None):
     """对候选站点做上游探活并淘汰/降级。返回 (sites, slow_set, probe_meta)"""
     probe_cfg = pack_cfg.get("upstream_probe", {})
     if not probe_cfg.get("enabled", False):
         return sites, set(), {}
-    host_map = load_host_map(base_dir, pack_cfg)
+    host_map = load_host_map(base_dir, pack_cfg, hosts_file)
     if not host_map:
         return sites, set(), {}
 
@@ -295,8 +295,6 @@ def apply_probe(sites, pack_cfg, base_dir, out_path):
     log("探活降级(慢>%dms) %d 个: %s" % (slow_ms, len(slow_cls), ", ".join(sorted(slow_cls)) or "无"))
     if unknown:
         log("无上游域名映射(保留) %d 个: %s" % (len(unknown), ", ".join(unknown)))
-    if not kept:
-        _die_soft(base_dir, out_path, "上游探活后 0 个可用站点")
     return kept, slow_cls, meta
 
 
@@ -310,6 +308,90 @@ def _die_soft(base_dir, out_path, reason):
         log("已删除旧包 %s" % out_path)
     log("直连流水线不受影响。")
     sys.exit(0)
+
+
+# ---------- 额外上游(每站独立 jar) ----------
+
+def _upstream_spec(name, d, defaults):
+    """把 extra_upstreams 里的一项补全默认值; 未给 allow_classes 则退回主配置的白名单会过宽, 故强制其自带。"""
+    return {
+        "name": name,
+        "interface": d.get("interface"),
+        "jar": d.get("jar", ""),
+        "hosts_file": d.get("hosts_file") or defaults.get("hosts_file", "spider_hosts.json"),
+        "allow_classes": d.get("allow_classes") or defaults.get("allow_classes", []),
+        "max_sites": d.get("max_sites", defaults.get("max_sites", 20)),
+    }
+
+
+def _build_one(spec, pack_cfg, base_dir, out_path):
+    """处理一个额外上游: 拉接口 -> 拉 jar -> 校验明文 -> 白名单裁剪 -> 探活 -> 截断。
+
+    与主上游同一套规则(deny_classes / drop_name_keywords / 探活), 但用各自的
+    hosts_file / allow_classes / max_sites。失败返回 None(调用方跳过, 不影响其它上游)。
+    """
+    itf_url = spec.get("interface")
+    if not itf_url:
+        log("[%s] 缺少 interface, 跳过" % spec["name"])
+        return None
+    log("[%s] 上游接口: %s" % (spec["name"], itf_url))
+    try:
+        itf = load_interface(itf_url)
+    except Exception as e:
+        log("[%s] 接口拉取失败: %s" % (spec["name"], e))
+        return None
+    itf_base = itf_url.split(";key=")[0]
+    spider_raw = spec.get("jar") or itf.get("spider") or ""
+    if not spider_raw:
+        log("[%s] 接口未提供 spider 且未配置 jar, 跳过" % spec["name"])
+        return None
+    jar_url = urljoin(itf_base, spider_raw.partition(";md5;")[0].strip())
+    if jar_url == itf_base.rstrip("/") or jar_url.endswith(".json"):
+        log("[%s] jar 地址异常(疑似占位图): %s" % (spec["name"], jar_url))
+        return None
+    log("[%s] 爬虫 jar: %s" % (spec["name"], jar_url))
+    try:
+        jar_bytes = _fetch_jar(jar_url)
+        encrypted, guard, dex_blob, url_count = inspect_jar(jar_bytes)
+    except Exception as e:
+        log("[%s] jar 下载/解析失败: %s" % (spec["name"], e))
+        return None
+    if encrypted:
+        log("[%s] jar 已加密(%s), 跳过该上游" % (spec["name"], ",".join(guard[:3])))
+        return None
+    if url_count == 0:
+        log("[%s] jar 无明文 URL, 跳过该上游" % spec["name"])
+        return None
+    log("[%s] jar 明文校验通过(明文URL %d 条)" % (spec["name"], url_count))
+
+    allow = set(spec.get("allow_classes") or [])
+    deny = set(pack_cfg.get("deny_classes", []))
+    drop_kw = pack_cfg.get("drop_name_keywords", [])
+    sites, absent = [], []
+    for s in itf.get("sites", []):
+        api = str(s.get("api", ""))
+        if not api.startswith("csp_"):
+            continue
+        cls = api[4:]
+        if allow and cls not in allow:
+            continue
+        if cls in deny:
+            continue
+        if any(k in s.get("name", "") for k in drop_kw):
+            continue
+        if cls.encode() not in dex_blob:
+            absent.append(cls)
+            continue
+        sites.append(dict(s))
+    sites, slow_cls, probe_meta = apply_probe(sites, pack_cfg, base_dir, out_path, spec.get("hosts_file"))
+    order = {c: i for i, c in enumerate(spec.get("allow_classes") or [])}
+    sites.sort(key=lambda s: (1 if s["api"][4:] in slow_cls else 0, order.get(s["api"][4:], 999)))
+    matched_all = len(sites)
+    sites = sites[:spec.get("max_sites", 20)]
+    log("[%s] 命中 %d 个(截断后 %d)" % (spec["name"], matched_all, len(sites)))
+    return {"name": spec["name"], "interface": itf_url, "jar_url": jar_url, "jar_bytes": jar_bytes,
+            "sites": sites, "matched_all": matched_all, "slow": sorted(slow_cls),
+            "dropped_absent": sorted(set(absent)), "probe": probe_meta}
 
 
 def main():
@@ -400,11 +482,37 @@ def main():
     if not sites:
         _die_soft(base_dir, out_path, "白名单命中 0 个可用站点(上游 jar/接口可能已变)")
 
-    # 4. 组装输出(spider 用明文 jar 的绝对地址; deploy_cos 会镜像到 COS 并重算 md5)
+    # 4. 额外上游(每个上游一个独立 jar -> 写到各自站点的 site.jar)
+    #    FongMi 的 Site 有 jar 字段: 站点自带 jar 优先, 为空才回退全局 spider —— 故多 jar 无需缝合。
     md5 = hashlib.md5(jar_bytes).hexdigest()
+    primary_final = len(sites)
+    jars = [{"name": "主上游", "url": jar_url, "md5": md5, "primary": True}]
+    extra_meta = []
+    for up in pack_cfg.get("extra_upstreams", []):
+        if not up.get("enabled", True):
+            log("额外上游 [%s] 已禁用, 跳过" % up.get("name", "?"))
+            continue
+        spec = _upstream_spec(up.get("name") or "额外上游", up, pack_cfg)
+        r = _build_one(spec, pack_cfg, base_dir, out_path)
+        if not r or not r["sites"]:
+            log("额外上游 [%s] 无可用站点, 跳过" % spec["name"])
+            continue
+        jars.append({"name": r["name"], "url": r["jar_url"],
+                     "md5": hashlib.md5(r["jar_bytes"]).hexdigest(), "primary": False})
+        for s in r["sites"]:
+            s["jar"] = r["jar_url"]          # per-site jar(明文 URL; deploy_cos 会镜像到 COS)
+        sites += r["sites"]
+        extra_meta.append({"name": r["name"], "interface": r["interface"], "jar": r["jar_url"],
+                           "kept": [s["api"][4:] for s in r["sites"]], "matched_all": r["matched_all"],
+                           "slow": r["slow"], "dropped_absent_in_jar": r["dropped_absent"],
+                           "probe": r["probe"]})
+        log("额外上游 [%s] 并入 %d 个站点" % (r["name"], len(r["sites"])))
+
+    # 5. 组装输出(spider 用主上游明文 jar 的绝对地址; deploy_cos 会镜像到 COS 并重算 md5)
     out = {
         "spider": "%s;md5;%s" % (jar_url, md5),
         "sites": sites,
+        "jars": jars,
         "meta": {
             "interface": itf_url,
             "jar": jar_url,
@@ -415,13 +523,15 @@ def main():
             "dropped_absent_in_jar": sorted(set(dropped_absent)),
             "dropped_denied": sorted(set(dropped_denied)),
             "probe": probe_meta,
+            "extra_upstreams": extra_meta,
             "built_at": time.strftime("%Y-%m-%d %H:%M:%S"),
         },
     }
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    log("源包已写出: %s (%d 个站点: %s)" % (out_path, len(sites), ", ".join(out["meta"]["kept"])))
+    log("源包已写出: %s (主 %d + 额外 %d = %d 个站点)" % (
+        out_path, primary_final, len(sites) - primary_final, len(sites)))
     if dropped_absent:
         log("注意: 接口引用但 jar 缺失的类(已剔除): %s" % ", ".join(sorted(set(dropped_absent))))
 

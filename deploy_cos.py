@@ -188,6 +188,38 @@ def deploy_spider(spider, source_base):
         return None
 
 
+def deploy_site_jars(itf):
+    """把站点级 jar(site.jar, 来自额外上游)镜像到 COS, 以「原名.内容md5」命名避免缓存陈旧。
+
+    站点自带 jar 的地址是明文的(如 L佬), 国内本身可达; 这里镜像更像「自托管 + 跟随更新」,
+    失败则保留原地址(不中断部署)。返回去重后的镜像数量。
+    """
+    cache, n = {}, 0
+    for s in itf.get("sites", []):
+        jar = s.get("jar")
+        if not isinstance(jar, str) or not jar.strip():
+            continue
+        url = jar.split(";md5;")[0].strip()
+        if not url.startswith("http") or COS_BASE in url:
+            continue
+        if url in cache:
+            s["jar"] = cache[url]
+            continue
+        try:
+            data = http_get(url)
+            h = md5_hex(data)
+            base = os.path.basename(urlparse(url).path) or "site.jar"
+            name, ext = os.path.splitext(base)
+            key = "jar/%s.%s%s" % (name, h[:10], ext or ".jar")
+            cos_url = cos_upload(key, data, "application/java-archive")
+            cache[url] = cos_url
+            s["jar"] = cos_url
+            n += 1
+        except Exception as e:
+            log("警告: 站点 jar 镜像失败, 保留原地址 (%s): %s" % (url, e))
+    return n
+
+
 def deploy_ref(v, source_base):
     """把单个字符串里可镜像的源引用重写为 COS 地址; 无关字符串原样返回。
 
@@ -234,32 +266,41 @@ def main():
     source_base = derive_source_base(spider) if spider else FALLBACK_SOURCE_BASE
     log("源仓库根: %s" % source_base)
 
-    # 1. spider jar 单独处理(需重算 md5)
+    # 1. spider jar(主上游)单独处理(需重算 md5)
     if spider:
         new_spider = deploy_spider(spider, source_base)
         if new_spider:
             itf["spider"] = new_spider
         else:
-            # jar 不可用: 移除 spider 与所有 csp 站点, 保证上传的接口仍完整可用
+            # 主 jar 不可用: 移除 spider 与「依赖全局 jar 的 csp 站点」; 带 site.jar 的站点保留
             itf.pop("spider", None)
-            old_sites = itf.get("sites", [])
-            dropped = [s for s in old_sites if str(s.get("api", "")).startswith("csp_")]
-            itf["sites"] = [s for s in old_sites if not str(s.get("api", "")).startswith("csp_")]
-            log("警告: jar 不可用, 已移除 %d 个秒播站, 本次仅部署直连源(接口仍完整可用)" % len(dropped))
+            keep, dropped = [], 0
+            for s in itf.get("sites", []):
+                if str(s.get("api", "")).startswith("csp_") and not s.get("jar"):
+                    dropped += 1
+                    continue
+                keep.append(s)
+            itf["sites"] = keep
+            log("警告: 主 jar 不可用, 已移除 %d 个依赖全局 jar 的秒播站(带 site.jar 的保留)" % dropped)
 
-    # 2. 其余字段(logo / ext / lives 等)递归重写
+    # 2. 站点级 jar(额外上游)镜像到 COS
+    n_site_jar = deploy_site_jars(itf)
+    if n_site_jar:
+        log("已镜像 %d 个站点级 jar 到 COS" % n_site_jar)
+
+    # 3. 其余字段(logo / ext / lives 等)递归重写
     for k in list(itf.keys()):
         if k == "spider":
             continue
         itf[k] = walk_rewrite(itf[k], source_base)
 
-    # 3. 本地存一份部署版, 便于 diff 查看
+    # 4. 本地存一份部署版, 便于 diff 查看
     deployed_path = os.path.join(base_dir, "dist", "deployed_interface.json")
     out = json.dumps(itf, ensure_ascii=False, indent=2).encode("utf-8")
     with open(deployed_path, "wb") as f:
         f.write(out)
 
-    # 4. 上传最终接口
+    # 5. 上传最终接口
     cos_upload(INTERFACE_KEY, out, "application/json")
     log("部署完成: %s/%s" % (COS_BASE, INTERFACE_KEY))
 
