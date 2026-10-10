@@ -1,8 +1,8 @@
-name: 每周全量筛选影视源
+name: 全量筛选影视源(周三/周日)
 
 on:
   schedule:
-    - cron: '20 1 * * 0'   # 每周日北京时间 09:20 运行
+    - cron: '20 1 * * 0,3'   # 每周日 + 周三 北京时间 09:20 运行
   workflow_dispatch:        # 允许手动触发(想立即换血时点这个)
 
 permissions:
