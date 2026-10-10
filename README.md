@@ -1,9 +1,8 @@
 # TvBox 自持源接口
 
-自维护的 TVBox/FongMi 影视源接口，供父母家 TCL 电视使用。GitHub Actions 自动维护，接口地址不变，电视端零操作。
+自维护的 TVBox/FongMi 影视源接口。GitHub Actions 自动维护，接口地址不变，电视端零操作。
 
 - 客户端：**蜂蜜影视**（FongMi 系，`com.fongmi.android.tv`）
-- 站点：9 个自用直连 CMS 源 + 每周自动补充的直连源 + 家庭向秒播源（**多个明文 jar 上游**，自托管到 COS，非加密、国内可加载）
 
 ## 电视端配置地址
 
@@ -26,10 +25,6 @@ https://cdn.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 | 自用直连源 | 9 | 量子 / 非凡 / 天堂 / 360 / 火狐 / 百度 / 索尼… 见 `my_sites.json`（**首页兜底源**） |
 | 自动补充直连源 | 若干 | 每周从公开合并接口筛出，去重后并入 |
 | 秒播源 | 约 40 | 儿童 / 影视 / 短剧 / 体育 / 戏曲·养生·预告；来自 **2 个明文 jar 上游**（qist + L佬）；每周自动探活，**死站剔除、慢站降级** |
-
-秒播源取自**明文 jar** 上游（主上游 `qist/tvbox`；额外上游 `L佬线路`），由 `build_spiders.py` 每周按各自白名单裁剪家庭向站点并**上游探活淘汰死站/慢站**；各 jar 镜像到自有 COS。**不加密、国内可直连**，因此不再受制于别人的加密 jar。
-
-**多上游 = 多 jar，无需缝合 jar**：FongMi 的站点对象有 `jar` 字段（站点自带 jar 优先，为空才回退全局 `spider`）。因此主上游的 jar 作全局 `spider`，每个额外上游的 jar 写到它自己站点的 `site.jar`。新增一个明文上游只需在 `config.json → spider_pack.extra_upstreams` 加一项（`interface` + `jar` + `allow_classes` + `hosts_file`），**无需改代码**。
 
 ## 自动维护
 
