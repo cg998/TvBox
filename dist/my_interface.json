@@ -84,45 +84,169 @@
       "filterable": 1
     },
     {
-      "key": "tv_back-023_虎牙",
-      "name": "🐯虎牙采集·ok线路1",
+      "key": "光速资源",
+      "name": "🌼光速┃资源🌼",
+      "type": 1,
+      "api": "https://api.guangsuapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "cj_采集",
+      "name": "🧞旺旺",
+      "type": 1,
+      "api": "https://api.wsyzy.net/api.php/provide/vod"
+    },
+    {
+      "key": "豆瓣资源",
+      "name": "🌼豆瓣┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "魔都资源",
+      "name": "🌼魔都┃影视🌼",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "茅台资源",
+      "name": "🌼茅台┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+      "searchable": 1,
+      "changeable": 1
+    },
+    {
+      "key": "360资源",
+      "name": "🍀｜360｜采集",
+      "type": 1,
+      "api": "https://360zy.com/api.php/seaxml/vod/",
+      "searchable": 1,
+      "changeable": 0,
+      "categories": [
+        "国产动漫",
+        "日韩动漫",
+        "国产剧",
+        "韩国剧",
+        "日本剧",
+        "电影片",
+        "连续剧",
+        "综艺片",
+        "动漫片",
+        "动作片",
+        "喜剧片",
+        "爱情片",
+        "科幻片",
+        "恐怖片",
+        "剧情片",
+        "战争片",
+        "香港剧",
+        "欧美剧",
+        "记录片",
+        "台湾剧",
+        "海外剧",
+        "泰国剧",
+        "大陆综艺",
+        "港台综艺",
+        "日韩综艺",
+        "欧美综艺",
+        "欧美动漫",
+        "港台动漫",
+        "海外动漫"
+      ]
+    },
+    {
+      "key": "虎牙",
+      "name": "🌼虎牙┃采集🌼",
       "type": 1,
       "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "极速资源",
+      "name": "🌼极速┃资源🌼",
+      "type": 1,
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "cj_暴风资源",
+      "name": "🧞暴风┃短剧",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "searchable": 0,
+      "quickSearch": 1,
+      "filterable": 1,
+      "playerType": 2,
+      "categories": [
+        "反转爽文",
+        "穿越年代",
+        "重生民国",
+        "现代言情",
+        "女恋总裁",
+        "都市脑洞",
+        "闪婚离婚",
+        "古装仙侠"
+      ]
+    },
+    {
+      "key": "虎牙资源",
+      "name": "烂大街",
+      "type": 1,
+      "api": "https://www.huyaapi.com/api.php/provide/vod/",
+      "playUrl": "",
       "searchable": 1,
       "quickSearch": 1,
       "categories": [
         "内地剧",
         "动作片",
-        "科幻片",
-        "战争片",
         "喜剧片",
         "爱情片",
+        "科幻片",
         "恐怖片",
-        "犯罪片",
         "剧情片",
-        "冒险片",
-        "记录片",
-        "韩剧",
+        "战争片",
         "香港剧",
-        "台湾剧",
+        "韩国剧",
         "欧美剧",
-        "日剧",
-        "马泰剧",
-        "体育赛事",
-        "综艺",
-        "动画片",
-        "中国动漫",
-        "日本动漫",
-        "欧美动漫"
+        "台湾剧",
+        "日本剧",
+        "海外剧",
+        "泰国剧",
+        "大陆综艺",
+        "港台综艺",
+        "日韩综艺",
+        "欧美综艺",
+        "国产动漫",
+        "日韩动漫",
+        "欧美动漫",
+        "港台动漫",
+        "海外动漫",
+        "古装片",
+        "犯罪片",
+        "惊悚片",
+        "冒险片",
+        "悬疑片",
+        "其他剧",
+        "邵氏电影"
       ]
     },
     {
-      "key": "tv_back-024_暴風",
-      "name": "🦔暴風┃采集·荐片",
+      "key": "非凡资源",
+      "name": "🌼非凡┃资源🌼",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "http://ffzy1.tv/api.php/provide/vod/",
       "searchable": 1,
-      "changeable": 1
+      "quickSearch": 1,
+      "filterable": 1
     },
     {
       "key": "tv_back-023_量子资源",
@@ -151,72 +275,21 @@
       ]
     },
     {
-      "key": "tv_back-023_csp_非凡资源",
-      "name": "🥗┃非凡┃资源·ok线路1",
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
       "type": 1,
-      "api": "http://ffzy1.tv/api.php/provide/vod/",
-      "playurl": "json:http://jx.84jia.com/m3u8ts.php?url=",
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
       "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "categories": [
-        "动作片",
-        "喜剧片",
-        "科幻片",
-        "恐怖片",
-        "爱情片",
-        "剧情片",
-        "战争片",
-        "记录片",
-        "国产剧",
-        "欧美剧",
-        "香港剧",
-        "韩国剧",
-        "台湾剧",
-        "日本剧",
-        "海外剧",
-        "泰国剧",
-        "国产动漫",
-        "日韩动漫",
-        "欧美动漫",
-        "港台动漫",
-        "海外动漫",
-        "大陆综艺",
-        "港台综艺",
-        "日韩综艺",
-        "欧美综艺"
-      ]
+      "quickSearch": 1
     },
     {
-      "key": "tv_back-026_ruyi",
-      "name": "🍀┃如意┃资源·1号VIP源",
+      "key": "量子资源",
+      "name": "🌼量子┃影视🌼",
       "type": 1,
-      "api": "https://cj.rycjapi.com/api.php/provide/vod",
+      "api": "https://cj.lziapi.com/api.php/provide/vod/from/lzm3u8",
       "searchable": 1,
       "quickSearch": 1,
-      "filterable": 1,
-      "categories": [
-        "韩国剧",
-        "欧美剧",
-        "台湾剧",
-        "战争片",
-        "国产剧",
-        "大陆综艺"
-      ],
-      "hide": 1
-    },
-    {
-      "key": "童趣",
-      "name": "童趣 • 儿童",
-      "type": 3,
-      "api": "csp_TongQu",
-      "searchable": 1,
-      "quickSearch": 0,
-      "changeable": 0,
-      "style": {
-        "type": "rect",
-        "ratio": 1.618
-      }
+      "filterable": 0
     },
     {
       "key": "兔小贝",
@@ -285,19 +358,6 @@
       "filterable": 1
     },
     {
-      "key": "双星",
-      "name": "双星 • 4K",
-      "type": 3,
-      "api": "csp_ShuangXing",
-      "searchable": 1,
-      "quickSearch": 0,
-      "filterable": 0,
-      "style": {
-        "type": "list"
-      },
-      "timeout": 60
-    },
-    {
       "key": "移动",
       "name": "移动 • 4K",
       "type": 3,
@@ -317,19 +377,6 @@
       "changeable": 0,
       "style": {
         "type": "list"
-      }
-    },
-    {
-      "key": "养生堂",
-      "name": "养生 • 知识",
-      "type": 3,
-      "api": "csp_YST",
-      "searchable": 0,
-      "quickSearch": 0,
-      "changeable": 0,
-      "style": {
-        "type": "rect",
-        "ratio": 1.618
       }
     },
     {
@@ -431,6 +478,19 @@
       "type": 3,
       "api": "csp_YGP",
       "searchable": 0
+    },
+    {
+      "key": "养生堂",
+      "name": "养生 • 知识",
+      "type": 3,
+      "api": "csp_YST",
+      "searchable": 0,
+      "quickSearch": 0,
+      "changeable": 0,
+      "style": {
+        "type": "rect",
+        "ratio": 1.618
+      }
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;ad23768671c972bdb881ec4398268dd2",
