@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-自有接口每日健康检查
+自有接口每日健康检查(每天北京 05:20 / 18:00 各一次)
 不重拉上游种子, 只体检 dist/my_interface.json 里的现有站点:
 - 采集源: 实测 ac=videolist(有内容) 且 class 非空(分类能显示), 记录延迟
 - drpy:  脚本地址可达
@@ -88,7 +88,9 @@ def main():
     opt["_base_dir"] = base_dir
     hc = cfg.get("health", {})
     threshold = hc.get("fail_threshold", 3)
-    today = time.strftime("%Y-%m-%d")
+    # 「天」以北京时间为准(UTC+8): 每天两次体检(北京 05:20 / 18:00)落在同一个北京日期,
+    # 使 fail_threshold 仍是「连挂 N 天」而非「连挂 N 次」。
+    today = time.strftime("%Y-%m-%d", time.gmtime(time.time() + 8 * 3600))
 
     itf_path = os.path.join(base_dir, cfg["output"]["interface"])
     with open(itf_path, encoding="utf-8") as f:
@@ -145,7 +147,8 @@ def main():
             state.pop(k, None)
         else:
             st = state.get(k, {"fails": 0})
-            st["fails"] = st.get("fails", 0) + 1
+            if st.get("last_fail") != today:  # 同一北京日期多次体检只记一次, 避免一天两跑提前剔除
+                st["fails"] = st.get("fails", 0) + 1
             st["last_fail"] = today
             st["name"] = r["name"]
             state[k] = st
@@ -203,7 +206,7 @@ def main():
     log("体检完成: 存活 %d, 降级 %d, 剔除 %d" % (len(alive), len(demoted), len(removed)))
 
     lines = ["# 每日健康检查报告", "",
-             "- 运行时间: %s" % time.strftime("%Y-%m-%d %H:%M:%S"),
+             "- 运行时间: %s (北京时间)" % time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(time.time() + 8 * 3600)),
              "- 存活: %d | 降级(挂但未达阈值): %d | 剔除(连续挂 %d 天): %d" % (len(alive), len(demoted), threshold, len(removed)),
              "", "| 站点 | 类型 | 状态 | 延迟ms | 分类 | 连续失败 | 备注 |",
              "|---|---|---|---|---|---|---|"]
