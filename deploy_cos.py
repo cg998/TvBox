@@ -42,18 +42,42 @@ def log(msg):
 
 # ---------- 网络 ----------
 
+def _mirror_candidates(url):
+    """raw.githubusercontent 在部分网络不稳, 给出镜像候选(直连优先, 其余回退)"""
+    if RAW_MARKER not in url:
+        return [url]
+    tail = url.split(RAW_MARKER, 1)[1]
+    direct = "https://" + RAW_MARKER + tail
+    parts = tail.split("/")
+    cands = [direct]
+    if len(parts) >= 3:
+        repo = "/".join(parts[:3])
+        if len(parts) >= 4:
+            cands.append("https://gh-proxy.com/" + direct)
+            cands.append("https://ghproxy.net/" + direct)
+            cands.append("https://raw.gitmirror.com/%s/%s" % (repo, "/".join(parts[3:])))
+    seen, out = set(), []
+    for c in cands:
+        if c not in seen:
+            seen.add(c); out.append(c)
+    return out
+
+
 def http_get(url, retries=2):
     last = None
-    for i in range(retries + 1):
-        try:
-            r = requests.get(url, headers=UA, timeout=40, allow_redirects=True)
-            if r.status_code == 200 and r.content:
-                return r.content
-            last = "HTTP %d" % r.status_code
-        except requests.RequestException as e:
-            last = repr(e)
-        if i < retries:
-            time.sleep(2)
+    for u in _mirror_candidates(url):
+        for i in range(retries + 1):
+            try:
+                r = requests.get(u, headers=UA, timeout=60, allow_redirects=True)
+                if r.status_code == 200 and r.content:
+                    if u != url:
+                        log("经镜像取回: %s" % u)
+                    return r.content
+                last = "HTTP %d" % r.status_code
+            except requests.RequestException as e:
+                last = repr(e)
+            if i < retries:
+                time.sleep(2)
     raise RuntimeError("下载失败 %s: %s" % (url, last))
 
 
@@ -104,9 +128,15 @@ def cos_upload(key, data, content_type=None):
     raise RuntimeError("上传失败 %s: %s" % (key, last))
 
 
-def mirror(url, cos_key, content_type=None):
-    """下载 url, 上传到 COS cos_key, 返回 COS 访问地址"""
-    data = http_get(url)
+def mirror(url, cos_key, content_type=None, required=True):
+    """下载 url, 上传到 COS cos_key。required=True 时失败抛异常; False 时返回 None(调用方保留原地址)"""
+    try:
+        data = http_get(url)
+    except RuntimeError as e:
+        if required:
+            raise
+        log("镜像失败(保留原地址): %s" % e)
+        return None
     log("镜像 %s (%d 字节) -> %s" % (url, len(data), cos_key))
     return cos_upload(cos_key, data, content_type)
 
@@ -139,18 +169,23 @@ def derive_source_base(spider_url):
 # ---------- 重写 ----------
 
 def deploy_spider(spider, source_base):
-    """spider 形如 URL;md5;HASH。下载 jar, 重算 md5, 镜像到 COS jar/, 返回新 spider 字符串"""
+    """spider 形如 URL;md5;HASH。下载 jar, 重算 md5, 镜像到 COS jar/, 返回新 spider 字符串。
+    失败返回 None(由调用方降级为纯直连接口)。"""
     url, sep, old_md5 = spider.partition(";md5;")
     url = url.strip()
     old_md5 = old_md5.strip()
-    data = http_get(url)
-    new_md5 = md5_hex(data)
-    cos_key = suffix_of_raw(url) or ("jar/" + (os.path.basename(urlparse(url).path) or "spider.jar"))
-    if not cos_key.lower().startswith("jar/"):
-        cos_key = "jar/" + os.path.basename(cos_key)
-    cos_url = mirror(url, cos_key, "application/java-archive")
-    log("spider 重算 md5: %s -> %s" % (old_md5 or "(空)", new_md5))
-    return "%s;md5;%s" % (cos_url, new_md5)
+    try:
+        data = http_get(url)
+        new_md5 = md5_hex(data)
+        cos_key = suffix_of_raw(url) or ("jar/" + (os.path.basename(urlparse(url).path) or "spider.jar"))
+        if not cos_key.lower().startswith("jar/"):
+            cos_key = "jar/" + os.path.basename(cos_key)
+        cos_url = cos_upload(cos_key, data, "application/java-archive")
+        log("spider 重算 md5: %s -> %s" % (old_md5 or "(空)", new_md5))
+        return "%s;md5;%s" % (cos_url, new_md5)
+    except Exception as e:
+        log("警告: spider jar 镜像失败: %s" % e)
+        return None
 
 
 def deploy_ref(v, source_base):
@@ -158,19 +193,18 @@ def deploy_ref(v, source_base):
 
     仅处理: 以 raw.githubusercontent 开头的直连地址, 以及 ./ 或 / 开头的相对路径。
     不处理: 已经用第三方代理(如 gh.927223.xyz)包装过的地址, 它们本就能国内访问。
+    镜像失败时保留原地址(不中断部署)。
     """
     if not isinstance(v, str):
         return v
     if v.startswith("./"):
-        rel = v[2:]
-        return mirror(source_base + rel, rel)
+        return mirror(source_base + v[2:], v[2:], required=False) or v
     if v.startswith("/"):
-        rel = v[1:]
-        return mirror(source_base + rel, rel)
+        return mirror(source_base + v[1:], v[1:], required=False) or v
     if v.startswith("https://raw.githubusercontent.com/") or v.startswith("http://raw.githubusercontent.com/"):
         suffix = suffix_of_raw(v)
         if suffix:
-            return mirror(v, suffix)
+            return mirror(v, suffix, required=False) or v
     return v
 
 
@@ -202,7 +236,16 @@ def main():
 
     # 1. spider jar 单独处理(需重算 md5)
     if spider:
-        itf["spider"] = deploy_spider(spider, source_base)
+        new_spider = deploy_spider(spider, source_base)
+        if new_spider:
+            itf["spider"] = new_spider
+        else:
+            # jar 不可用: 移除 spider 与所有 csp 站点, 保证上传的接口仍完整可用
+            itf.pop("spider", None)
+            old_sites = itf.get("sites", [])
+            dropped = [s for s in old_sites if str(s.get("api", "")).startswith("csp_")]
+            itf["sites"] = [s for s in old_sites if not str(s.get("api", "")).startswith("csp_")]
+            log("警告: jar 不可用, 已移除 %d 个秒播站, 本次仅部署直连源(接口仍完整可用)" % len(dropped))
 
     # 2. 其余字段(logo / ext / lives 等)递归重写
     for k in list(itf.keys()):

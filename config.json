@@ -2,6 +2,29 @@
   "seeds": [
     { "name": "tvbox.org自动合并", "url": "https://raw.githubusercontent.com/TVboxorg/Tvbox/main/dist/official.json" }
   ],
+  "spider_pack": {
+    "_说明": "A方案: 从明文jar上游拉取秒播/爬虫源, 按白名单裁剪家庭向站点, 托管到自有COS。每次运行自动跟随上游更新; jar 若被改成加密版会自动停用本环节。",
+    "enabled": true,
+    "interface": "https://raw.githubusercontent.com/qist/tvbox/master/jsm.json",
+    "jar": "",
+    "allow_classes": [
+      "TongQu", "TuXiaoBei", "BeiLeHu",
+      "Duboku", "New6v", "Web1905", "Gz360", "MeijuMi", "ShuangXing", "Yidong4K", "AppLY", "YST",
+      "GuiGui", "ShortWeiguan", "ShortXingya", "ShortQimao", "ShortHaokan", "ShortHema",
+      "Sports88", "SportsGuazi", "SportsKafei", "SportsFeiqiu",
+      "YGP"
+    ],
+    "deny_classes": [
+      "AiPan", "KKPan", "MiPan", "Pan123", "PanAli", "PanBaidu", "PanGuangya",
+      "PanQuark", "PanSou", "PanTianyi", "PanUC", "PanWebShare", "PanWebShareHJ",
+      "PanXunlei", "QuPanSo", "SeedHub", "XBPQ", "Xunlei8", "4KZhinan", "Ikanbot",
+      "Djuu", "QingtingFM", "TingBokan", "TingJinxia", "TingShijie", "SaoHuo",
+      "Config", "LocalFile", "Push"
+    ],
+    "drop_name_keywords": ["网盘", "云盘", "阿里", "夸克", "迅雷", "百度", "听书", "音乐", "有声", "电台", "广播"],
+    "max_sites": 24,
+    "output": "dist/spider_pack.json"
+  },
   "options": {
     "workers": 16,
     "timeout": 10,

@@ -5,3 +5,4 @@ __pycache__/
 dist/deployed_interface.json
 dist/report.md
 dist/health_report.md
+dist/spider_pack.json

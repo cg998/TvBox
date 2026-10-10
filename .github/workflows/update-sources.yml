@@ -21,6 +21,9 @@ jobs:
       - name: 安装依赖
         run: pip install requests pycryptodome cos-python-sdk-v5
 
+      - name: 构建秒播源包(明文jar)
+        run: python build_spiders.py config.json
+
       - name: 运行筛选脚本
         run: python filter_sources.py config.json
 

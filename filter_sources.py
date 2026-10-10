@@ -361,6 +361,32 @@ def main():
             out[k] = absolutize(base[k].split(";")[0], base_url) + (";" + base[k].split(";", 1)[1] if ";" in base[k] else "")
     own_keys = {dedup_key(s) for s in own}
     out["sites"] = own + [r["site"] for r in kept if dedup_key(r["site"]) not in own_keys]
+
+    # 合并「秒播源包」(由 build_spiders.py 从明文 jar 上游裁剪产出; 见 config.spider_pack)
+    # 放在直连源之后。spider 字段指向明文 jar 的绝对地址, 随后由 deploy_cos.py 镜像到 COS。
+    pack_cfg = cfg.get("spider_pack", {})
+    pack_path = os.path.join(base_dir, pack_cfg.get("output", "dist/spider_pack.json"))
+    n_pack = 0
+    if pack_cfg.get("enabled") and os.path.exists(pack_path):
+        try:
+            with open(pack_path, encoding="utf-8") as f:
+                pack = json.load(f)
+            if pack.get("spider") and pack.get("sites"):
+                out["spider"] = pack["spider"]
+                have = {(s.get("api"), s.get("key")) for s in out["sites"]}
+                for s in pack["sites"]:
+                    sig = (s.get("api"), s.get("key"))
+                    if sig not in have:
+                        out["sites"].append(s); have.add(sig)
+                n_pack = len(pack["sites"])
+                log("已合并秒播源包: %d 个站点 (spider -> %s)" % (n_pack, pack["spider"].split(";")[0]))
+            else:
+                log("秒播源包为空, 跳过合并")
+        except (OSError, json.JSONDecodeError) as e:
+            log("秒播源包读取失败, 忽略: %s" % e)
+    elif pack_cfg.get("enabled"):
+        log("未找到秒播源包(%s), 本次仅直连源" % pack_path)
+
     for k in ("parses", "flags", "ijk", "lives", "ads", "rules", "doh"):
         if base.get(k):
             out[k] = base[k]
@@ -369,12 +395,14 @@ def main():
     itf_path = os.path.join(base_dir, cfg["output"]["interface"])
     with open(itf_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    log("接口已写出: %s (站点 %d 个)" % (itf_path, len(out["sites"])))
+    log("接口已写出: %s (站点 %d 个 = 自用 %d + 直连筛选 %d + 秒播源包 %d)" % (
+        itf_path, len(out["sites"]), len(own), len(out["sites"]) - len(own) - n_pack, n_pack))
 
     # 6. 报告
     lines = ["# 源筛选报告", "",
              "- 运行时间: %s" % time.strftime("%Y-%m-%d %H:%M:%S"),
-             "- 站点池: %d | 通过: %d | 去重后保留: %d | 自用置顶: %d" % (len(pool), ok_cnt, len(kept), len(own)),
+             "- 站点池: %d | 通过: %d | 去重后保留: %d | 自用置顶: %d | 秒播源包: %d" % (
+                 len(pool), ok_cnt, len(kept), len(own), n_pack),
              "", "| 站点 | 来源 | 类型 | 结果 | 延迟ms | 1080p | 备注 |",
              "|---|---|---|---|---|---|---|"]
     for r in sorted(results, key=lambda r: (not r["ok"], r["ms"] or 99999)):
