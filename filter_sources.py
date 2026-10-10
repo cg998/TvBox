@@ -420,18 +420,8 @@ def main():
     elif pack_cfg.get("enabled"):
         log("未找到秒播源包(%s), 本次仅直连源" % pack_path)
 
-    # 首页可配置(第②项): 若指定首选类且本次命中, 顶到 sites[0]; 否则维持 my_sites 第一个(=量子)
-    # 挂了自动回退的逻辑在 health_check.py(fallback_key)。
-    hp = cfg.get("homepage", {})
-    pref = (hp.get("preferred_class") or "").strip()
-    if pref:
-        idx = next((i for i, s in enumerate(out["sites"]) if s.get("api") == "csp_" + pref), None)
-        if idx is None:
-            log("首页首选类 csp_%s 未在本次站点中, 维持默认首页(%s)" % (pref, out["sites"][0].get("name")))
-        elif idx > 0:
-            s = out["sites"].pop(idx)
-            out["sites"].insert(0, s)
-            log("首页已切换为 [%s] (csp_%s)" % (s.get("name"), pref))
+    # 首页 + 搜索优先排序(第②项, 逻辑见 apply_homepage_order)
+    out["sites"] = apply_homepage_order(out["sites"], cfg)
 
     for k in ("parses", "flags", "ijk", "lives", "ads", "rules", "doh"):
         if base.get(k):
@@ -460,6 +450,37 @@ def main():
     with open(rpt_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
     log("报告已写出: %s" % rpt_path)
+
+
+def apply_homepage_order(sites, cfg):
+    """首页 + 搜索优先排序(第②项)。
+    - preferred_class: 该秒播类顶到 sites[0] 作首页(父母靠首页分类浏览, 应选分类齐全的站)。
+    - priority_classes: 这些秒播类整体排到「直连源」之前 —— App 搜索按站点顺序分组展示, 前置即搜索优先。
+    - fallback_key: 首页源不可用时由 health_check 回退(本函数不处理)。
+    """
+    hp = cfg.get("homepage", {})
+    pref = (hp.get("preferred_class") or "").strip()
+    prio = [c for c in (hp.get("priority_classes") or []) if c]
+    if pref and pref not in prio:
+        prio.insert(0, pref)
+    if not prio:
+        return sites
+    by_api = {s.get("api"): s for s in sites}   # 秒播站 key 由上游自定义, 匹配须用 api(=csp_类名)
+    front, fids = [], set()
+    for c in prio:
+        s = by_api.get("csp_" + c)
+        if s is not None and id(s) not in fids:
+            front.append(s)
+            fids.add(id(s))
+    if front and pref and front[0].get("api") == "csp_" + pref:
+        log("首页 = [%s]; 搜索优先前置 %d 个秒播站: %s" % (
+            front[0].get("name"), len(front), ", ".join(s.get("name") for s in front)))
+    elif pref:
+        log("首页首选类 csp_%s 未在本次站点中, 维持默认首页(%s)" % (pref, sites[0].get("name")))
+    if not front:
+        return sites
+    rest = [s for s in sites if id(s) not in fids]
+    return front + rest
 
 
 if __name__ == "__main__":

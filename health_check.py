@@ -170,8 +170,39 @@ def main():
             alive.append((s, r))
     new_sites = [s for s, _ in alive] + [r["site"] for r in demoted]
 
-    # 首页保障: sites[0] 必须存活且(若是采集源)分类齐全
+    # 秒播首页兜底(第②项): csp 源离线无法实测, 用「上游域名探活」近似判断其是否还活着。
+    #   - 首页若是 csp 源: 上游域名全不可达 -> 判为不可用 -> 回退 fallback_key(默认量子)。
+    #   - 安全阀: 若本批 priority 秒播源整体探不通(dead 占比 > 0.6, 说明探针网络不通, 如 CI 在境外),
+    #     则不据此回退 —— 宁可保留人工精选的首页, 也不交给不可靠的探针。
+    pack_cfg = cfg.get("spider_pack", {}) or {}
+    probe_res, probe_unreliable = {}, False
+    try:  # 复用 build_spiders 的上游域名探活(类->真实域名, 见 spider_hosts.json)
+        from build_spiders import load_host_map, probe_classes
+    except ImportError:
+        load_host_map = probe_classes = None
+    if probe_classes and pack_cfg:
+        host_map = load_host_map(base_dir, pack_cfg)
+        if host_map:
+            prio = [c for c in (hp.get("priority_classes") or []) if c]
+            if pref_cls and pref_cls not in prio:
+                prio.insert(0, pref_cls)
+            apis_now = {s.get("api") for s in sites}   # 秒播站 key 由上游自定义, 须按 api(=csp_类名) 匹配
+            probe_set = [c for c in prio if ("csp_" + c) in apis_now]
+            if probe_set:
+                probe_res = probe_classes(probe_set, host_map, opt.get("timeout", 8))
+                dead_n = sum(1 for c in probe_set if probe_res.get(c, {}).get("verdict") == "dead")
+                probe_unreliable = dead_n / float(len(probe_set)) > 0.6
+                log("首页秒播源上游探活: %d 个类, 判死 %d, 探针%s" % (
+                    len(probe_set), dead_n,
+                    "不可靠(不据以回退)" if probe_unreliable else "可靠"))
+
+    # 首页保障: sites[0] 必须存活且(若是采集源)分类齐全; 若是秒播源则按上游探活判断
     def homepage_ok(r):
+        if r["kind"] == "csp":
+            if probe_unreliable:
+                return True   # 探针不可靠时不据以回退
+            v = probe_res.get((r["site"].get("api") or "")[4:], {}).get("verdict")
+            return v != "dead"  # 无探活数据(None)不判死
         return r["ok"] is not False and (r["kind"] != "collect" or r["classes"])
     if new_sites:
         first = new_sites[0]
@@ -219,10 +250,15 @@ def main():
         else:
             status = "存活" if r["ok"] is not False else ("已剔除" if st.get("fails", 0) >= threshold else "降级")
         cls = {True: "有", False: "无", None: "-"}[r["classes"]]
+        note = r["note"]
+        if r["kind"] == "csp":
+            pv = probe_res.get((r["site"].get("api") or "")[4:], {}).get("verdict")
+            if pv:
+                note = "%s; 上游探活:%s" % (note, pv)
         lines.append("| %s | %s | %s | %s | %s | %d | %s |" % (
             r["name"], r["kind"], status,
             r["ms"] if r["ms"] is not None else "-", cls,
-            st.get("fails", 0), r["note"]))
+            st.get("fails", 0), note))
     rpt_path = os.path.join(base_dir, hc.get("report", "dist/health_report.md"))
     with open(rpt_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")

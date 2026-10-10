@@ -6,8 +6,9 @@
     { "name": "俊佬top98", "url": "http://home.jundie.top:81/top98.json" }
   ],
   "homepage": {
-    "_说明": "默认首页源(App 打开显示的站)。preferred_class 填某个秒播类(如 Duboku), 命中则顶到 sites[0]; 留空则用 my_sites.json 第一个(=量子)。该源不可用时 health_check 回退到 fallback_key。",
-    "preferred_class": "",
+    "_说明": "首页 + 搜索优先。preferred_class 的秒播类顶到 sites[0] 作首页(App 打开显示的站, 应选分类齐全的站, 父母靠首页分类浏览); priority_classes 里的秒播类整体排到「直连源」之前 —— App 搜索按站点顺序分组展示, 前置即搜索优先; fallback_key 是首页源不可用时 health_check 回退到的站(默认量子, 自用直连)。留空 preferred_class 则维持 my_sites.json 第一个(=量子)。",
+    "preferred_class": "Duboku",
+    "priority_classes": ["Duboku", "Gz360", "Hxq", "Web1905", "FengYe", "ShuangXing", "RenRen", "Jike", "Yidong4K"],
     "fallback_key": "lzzy"
   },
   "spider_pack": {
