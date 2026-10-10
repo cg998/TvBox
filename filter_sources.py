@@ -257,6 +257,14 @@ def dedup_key(site):
     return (p.netloc + p.path).rstrip("/").lower()
 
 
+def domain_of(site):
+    """取直连源的主机名(用于同域去重)。爬虫/脚本等非 http 源返回 ""。"""
+    api = (site.get("api") or "").strip()
+    if api.startswith("csp_") or not api.lower().startswith("http"):
+        return ""
+    return urlparse(api).netloc.lower()
+
+
 # ---------- 主流程 ----------
 
 def main():
@@ -333,6 +341,20 @@ def main():
         best.setdefault(dedup_key(r["site"]), r)
     kept = [r for r in best.values() if r["ok"]]
     kept.sort(key=lambda r: (r["kind"] != "collect", r["hd"] is not True, r["ms"] or 9999))
+
+    # 4b. 同域去重: 同一域名只留排名最高的一个直连源(去掉量子/360/虎牙等同一站点的不同线路)
+    if opt.get("dedup_domain", True):
+        seen_dom, dd = set(), []
+        for r in kept:
+            d = domain_of(r["site"])
+            if d:
+                if d in seen_dom:
+                    log("同域去重: 丢弃 [%s] (%s)" % (r["name"], d))
+                    continue
+                seen_dom.add(d)
+            dd.append(r)
+        kept = dd
+
     # 直连采集源优先; 秒播/爬虫类(drpy/csp/other)最多保留 max_spiders 个兜底, 其余名额给直连
     max_spiders = opt.get("max_spiders", 8)
     collects = [r for r in kept if r["kind"] == "collect"]
@@ -360,7 +382,18 @@ def main():
         if base.get(k):
             out[k] = absolutize(base[k].split(";")[0], base_url) + (";" + base[k].split(";", 1)[1] if ";" in base[k] else "")
     own_keys = {dedup_key(s) for s in own}
-    out["sites"] = own + [r["site"] for r in kept if dedup_key(r["site"]) not in own_keys]
+    own_doms = {domain_of(s) for s in own if domain_of(s)}
+    picked = []
+    for r in kept:
+        s = r["site"]
+        if dedup_key(s) in own_keys:
+            continue
+        d = domain_of(s)
+        if d and d in own_doms:  # 与自用源同域(如量子/360), 上游副本丢弃
+            log("同域去重: 丢弃 [%s] (%s, 与自用源同域)" % (r["name"], d))
+            continue
+        picked.append(s)
+    out["sites"] = own + picked
 
     # 合并「秒播源包」(由 build_spiders.py 从明文 jar 上游裁剪产出; 见 config.spider_pack)
     # 放在直连源之后。spider 字段指向明文 jar 的绝对地址, 随后由 deploy_cos.py 镜像到 COS。

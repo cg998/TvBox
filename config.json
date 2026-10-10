@@ -16,8 +16,9 @@
     "interface": "https://raw.githubusercontent.com/qist/tvbox/master/jsm.json",
     "jar": "",
     "hosts_file": "spider_hosts.json",
-    "force_drop": [],
-    "force_keep": [],
+    "_force说明": "人工兜底: 探活跑在境外CI, 对国内站偶有误判。force_keep=绝不剔除(国内可达却被判死); force_drop=强制剔除(国内已死却判活)。只影响剔除, 不影响慢速降级。",
+    "force_drop": ["SportsKafei"],
+    "force_keep": ["ShuangXing"],
     "upstream_probe": {
       "_说明": "对白名单类做上游探活(第①项): 全部域名不可达->剔除; 可达但最快延迟>slow_ms->降级到站点末尾。若 dead 占比 > unreliable_dead_ratio(说明探针所在网络整体不通, 如 CI 在境外), 本轮只记录不淘汰。跑在境外节点时结果仅供参考, 可疑的类名可写进 force_keep/force_drop 人工覆盖。",
       "enabled": true,
@@ -55,7 +56,8 @@
     "max_spiders": 0,
     "max_sites": 20,
     "collection_limit": 6,
-    "drop_keywords": ["公众号", "关注", "打赏", "加群", "失效", "测试勿用"]
+    "drop_keywords": ["公众号", "关注", "打赏", "加群", "失效", "测试勿用"],
+    "dedup_domain": true
   },
   "output": {
     "interface": "dist/my_interface.json",
