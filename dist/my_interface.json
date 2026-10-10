@@ -3,6 +3,86 @@
   "logo": "https://storage.7x24cc.com/storage-server/presigned/ss1/a6-online-fileupload/newMediaFile/3CEAE9E_773_wexfnw_20250911190012684newMediaFile.gif",
   "sites": [
     {
+      "key": "独播影视",
+      "name": "独播 • 影视",
+      "type": 3,
+      "api": "csp_Duboku"
+    },
+    {
+      "key": "瓜子影视",
+      "name": "瓜子 • 影视",
+      "type": 3,
+      "api": "csp_Gz360"
+    },
+    {
+      "key": "韩圈",
+      "name": "韩圈 • APP",
+      "type": 3,
+      "api": "csp_Hxq"
+    },
+    {
+      "key": "1905",
+      "name": "1905 • 影视",
+      "type": 3,
+      "api": "csp_Web1905",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0
+    },
+    {
+      "key": "枫叶影视",
+      "name": "枫叶 • 影视",
+      "type": 3,
+      "api": "csp_FengYe",
+      "ext": "https://www.vip1949.com/"
+    },
+    {
+      "key": "双星",
+      "name": "双星 • 4K",
+      "type": 3,
+      "api": "csp_ShuangXing",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0,
+      "style": {
+        "type": "list"
+      },
+      "timeout": 60
+    },
+    {
+      "key": "人人",
+      "name": "人人 • 4K",
+      "type": 3,
+      "api": "csp_RenRen",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "timeout": 60
+    },
+    {
+      "key": "即刻",
+      "name": "即刻 • 4K",
+      "type": 3,
+      "api": "csp_Jike",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0,
+      "style": {
+        "type": "list"
+      },
+      "timeout": 60
+    },
+    {
+      "key": "移动",
+      "name": "移动 • 4K",
+      "type": 3,
+      "api": "csp_Yidong4K",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "timeout": 60
+    },
+    {
       "key": "lzzy",
       "name": "量子资源",
       "type": 1,
@@ -92,13 +172,10 @@
       "quickSearch": 1
     },
     {
-      "key": "魔都资源",
-      "name": "🌼魔都┃影视🌼",
+      "key": "cj_采集",
+      "name": "🧞旺旺",
       "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
+      "api": "https://api.wsyzy.net/api.php/provide/vod"
     },
     {
       "key": "豆瓣资源",
@@ -113,6 +190,14 @@
       "name": "🌼虎牙┃采集🌼",
       "type": 1,
       "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
+      "type": 1,
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
       "searchable": 1,
       "quickSearch": 1
     },
@@ -154,12 +239,6 @@
       "quickSearch": 1
     },
     {
-      "key": "cj_采集",
-      "name": "🧞旺旺",
-      "type": 1,
-      "api": "https://api.wsyzy.net/api.php/provide/vod"
-    },
-    {
       "key": "tv_back-023_量子资源",
       "name": "🥑┃量子┃资源·ok线路1",
       "type": 1,
@@ -186,12 +265,13 @@
       ]
     },
     {
-      "key": "金鹰资源",
-      "name": "🌼金鹰┃资源🌼",
+      "key": "魔都资源",
+      "name": "🌼魔都┃影视🌼",
       "type": 1,
-      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
+      "api": "https://www.mdzyapi.com/api.php/provide/vod",
       "searchable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "filterable": 1
     },
     {
       "key": "tv_back-026_ruyi",
@@ -220,13 +300,6 @@
       "changeable": 1
     },
     {
-      "key": "采集集合",
-      "name": "采集集合+",
-      "type": 4,
-      "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
-      "ext": "0"
-    },
-    {
       "key": "兔小贝",
       "name": "兔小贝 • 儿童",
       "type": 3,
@@ -253,12 +326,6 @@
       }
     },
     {
-      "key": "独播影视",
-      "name": "独播 • 影视",
-      "type": 3,
-      "api": "csp_Duboku"
-    },
-    {
       "key": "New6v",
       "name": "New6V • 磁力",
       "type": 3,
@@ -269,21 +336,6 @@
       "ext": "https://www.xb6v.com"
     },
     {
-      "key": "1905",
-      "name": "1905 • 影视",
-      "type": 3,
-      "api": "csp_Web1905",
-      "searchable": 1,
-      "quickSearch": 0,
-      "filterable": 0
-    },
-    {
-      "key": "瓜子影视",
-      "name": "瓜子 • 影视",
-      "type": 3,
-      "api": "csp_Gz360"
-    },
-    {
       "key": "美剧迷",
       "name": "美剧迷 • 磁力",
       "type": 3,
@@ -291,29 +343,6 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
-    },
-    {
-      "key": "双星",
-      "name": "双星 • 4K",
-      "type": 3,
-      "api": "csp_ShuangXing",
-      "searchable": 1,
-      "quickSearch": 0,
-      "filterable": 0,
-      "style": {
-        "type": "list"
-      },
-      "timeout": 60
-    },
-    {
-      "key": "移动",
-      "name": "移动 • 4K",
-      "type": 3,
-      "api": "csp_Yidong4K",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
     },
     {
       "key": "戏曲多多",
@@ -345,42 +374,6 @@
       "name": "飞娱 • 影视",
       "type": 3,
       "api": "csp_Feiyu"
-    },
-    {
-      "key": "枫叶影视",
-      "name": "枫叶 • 影视",
-      "type": 3,
-      "api": "csp_FengYe",
-      "ext": "https://www.vip1949.com/"
-    },
-    {
-      "key": "人人",
-      "name": "人人 • 4K",
-      "type": 3,
-      "api": "csp_RenRen",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
-    },
-    {
-      "key": "即刻",
-      "name": "即刻 • 4K",
-      "type": 3,
-      "api": "csp_Jike",
-      "searchable": 1,
-      "quickSearch": 0,
-      "filterable": 0,
-      "style": {
-        "type": "list"
-      },
-      "timeout": 60
-    },
-    {
-      "key": "韩圈",
-      "name": "韩圈 • APP",
-      "type": 3,
-      "api": "csp_Hxq"
     },
     {
       "key": "金牌影视",
@@ -507,16 +500,6 @@
       "ext": "https://cz01.vip"
     },
     {
-      "key": "鬼鬼",
-      "name": "鬼鬼 • 搜索",
-      "type": 3,
-      "api": "csp_GuiGui",
-      "searchable": 1,
-      "quickSearch": 0,
-      "filterable": 0,
-      "timeout": 60
-    },
-    {
       "key": "围观短剧",
       "name": "围观 • 短剧",
       "type": 3,
@@ -568,6 +551,18 @@
       "name": "瓜子 • 体育",
       "type": 3,
       "api": "csp_SportsGuazi",
+      "searchable": 0,
+      "quickSearch": 0,
+      "changeable": 0,
+      "style": {
+        "type": "list"
+      }
+    },
+    {
+      "key": "飞球体育",
+      "name": "飞球 • 体育",
+      "type": 3,
+      "api": "csp_SportsFeiqiu",
       "searchable": 0,
       "quickSearch": 0,
       "changeable": 0,
@@ -632,6 +627,16 @@
       "searchable": 0,
       "filterable": 1,
       "ext": "http://www.hktvyb.vip/",
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "XuanFeng",
+      "name": "旋风影视",
+      "type": 3,
+      "api": "csp_XuanFeng",
+      "searchable": 1,
+      "changeable": 1,
+      "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
