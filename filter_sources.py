@@ -301,6 +301,9 @@ def main():
             s = dict(site)
             if not (s.get("api") or "").startswith("csp_"):
                 s["api"] = absolutize(s.get("api"), src_url)
+                # 归一化: 剥离上游自带的 ?ac=list 后缀(标准接口由 App 自行拼 ac 参数)
+                if "ac=list" in (s["api"] or ""):
+                    s["api"] = s["api"].split("?")[0]
             if isinstance(s.get("jar"), str):
                 s["jar"] = absolutize(s["jar"], src_url)
             if isinstance(s.get("ext"), str) and s["ext"].startswith(("./", "/")):
@@ -352,9 +355,12 @@ def main():
     base_url = next(u for u, o in [(u, o) for _, u, o in interfaces] if o is base)
     out = {}
     for k in ("spider", "wallpaper", "logo"):
+        if k == "spider" and not any(r["kind"] in ("csp", "drpy") for r in kept):
+            continue  # 无爬虫/脚本源时, 不携带 spider 字段(上游 spider 可能只是占位图)
         if base.get(k):
             out[k] = absolutize(base[k].split(";")[0], base_url) + (";" + base[k].split(";", 1)[1] if ";" in base[k] else "")
-    out["sites"] = own + [r["site"] for r in kept]
+    own_keys = {dedup_key(s) for s in own}
+    out["sites"] = own + [r["site"] for r in kept if dedup_key(r["site"]) not in own_keys]
     for k in ("parses", "flags", "ijk", "lives", "ads", "rules", "doh"):
         if base.get(k):
             out[k] = base[k]

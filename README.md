@@ -3,7 +3,7 @@
 自维护的 TVBox/FongMi 影视源接口，供父母家 TCL 电视使用。由 GitHub Actions 自动维护：每天体检 + 每周换血，接口地址永不变，电视端零操作。
 
 - 客户端：**蜂蜜影视**（FongMi 系，`com.fongmi.android.tv`），支持自动跳过失效线路、自动换站源、重启后重新加载配置
-- 站点构成：**自用 8 个直连 CMS 源置顶 + 每周自动筛选的新源**（最多 30 个，其中秒播/爬虫类最多 8 个兜底，直连占大头）
+- 站点构成：**自用 9 个直连 CMS 源置顶 + 每周从 tvbox.org 自动合并接口筛选的新源**（纯直连，已彻底移除爬虫/秒播源）
 - 内容侧重：约 7 成影视 + 3 成动漫儿童；无直播
 - 免费、无广告、无会员
 
@@ -15,9 +15,9 @@
 https://tvbox-202610-1503022424.cos.ap-guangzhou.myqcloud.com/my_interface.json
 ```
 
-> 说明：主地址走腾讯云 COS。爬虫源所需的 spider jar（Bee.jar）、App 图标、哔哩扩展 json 都已由流水线自动镜像到 COS，因此秒播/爬虫类站点在国内也能正常加载（不再依赖被墙的 raw.githubusercontent）。
+> 说明：主地址走腾讯云 COS。由于已彻底移除爬虫/秒播源（它们依赖加密 jar、在国内不稳定），接口只剩直连 CMS 源，无需再中转 jar，稳定性大幅提升。
 
-备用地址（主地址失效时，直连源可用、爬虫源不可用）：
+备用地址（主地址失效时用）：
 
 ```
 https://cdn.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
@@ -28,26 +28,26 @@ https://cdn.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 | 任务 | 频率 | 做什么 |
 |---|---|---|
 | 每日健康检查 | 每天 05:20（北京） | 只体检接口内现有站点：挂了的降级到末尾，连续挂 3 天剔除；保证首页默认源存活且分类齐全，挂了自动顶最佳存活源上去。全健康时零提交 |
-| 每周全量筛选 | 每周日 09:20（北京）+ 可手动 | 从 9 个上游种子拉新源 → 解密 → 关键词过滤 → 实测/高清探测 → 去重 → 自用 8 源置顶 + 筛选源，输出 `dist/my_interface.json` |
-| 部署到 COS | 随上面两步自动执行 | 把 jar / 图标 / 扩展 json 镜像到腾讯云 COS，重写接口里的被墙地址，上传最终接口到 COS |
+| 每周全量筛选 | 每周日 09:20（北京）+ 可手动 | 从 tvbox.org 自动合并接口（每日探测 38 个上游）拉新源 → 解密 → 关键词过滤 → 实测/高清探测 → 去重 → 自用 9 源置顶 + 筛选出的直连源，输出 `dist/my_interface.json` |
+| 部署到 COS | 随上面两步自动执行 | 把接口里的被墙地址镜像到腾讯云 COS（重写为 COS 绝对地址），上传最终接口到 COS |
 
 ## 文件说明
 
 | 文件 | 作用 |
 |---|---|
 | `dist/my_interface.json` | 正式接口（Actions 自动生成，电视端填这个地址） |
-| `my_sites.json` | 自用 8 个站点，无条件置顶（第一位 = 默认首页源） |
-| `config.json` | 流水线参数（站点上限 30、秒播上限 8、上游种子、关键词过滤） |
+| `my_sites.json` | 自用 9 个站点，无条件置顶（第一位 = 默认首页源） |
+| `config.json` | 流水线参数（站点上限 20、已关爬虫、上游种子 = tvbox.org 官方合并接口、关键词过滤） |
 | `filter_sources.py` | 每周全量筛选脚本 |
 | `health_check.py` | 每日健康检查脚本 |
-| `deploy_cos.py` | 部署脚本：镜像 jar/图标/扩展 json 到 COS 并上传接口 |
+| `deploy_cos.py` | 部署脚本：镜像被墙地址到 COS 并上传接口 |
 | `.github/workflows/` | 定时任务调度 |
 | `tv.json` | 静态兜底接口（Actions 万一挂了，电视端可手动切回这个地址） |
 | `test_tv.py` | 手动自测工具（测 `tv.json`） |
 
 ## 站点构成
 
-### 自用置顶（8 个直连 CMS 源）
+### 自用置顶（9 个直连 CMS 源）
 
 | 站点 | 接口地址 | 侧重 |
 |---|---|---|
@@ -59,10 +59,11 @@ https://cdn.jsdelivr.net/gh/cg998/TvBox@main/dist/my_interface.json
 | 非凡备用 | `http://ffzy5.tv/api.php/provide/vod` | 影视备用 |
 | 百度资源 | `https://api.apibdzy.com/api.php/provide/vod/` | 儿童动画 |
 | 非凡影视 | `http://www.ffzy.tv/api.php/provide/vod/` | 影视（非凡镜像） |
+| 索尼资源 | `https://suoniapi.com/api.php/provide/vod` | 影视（新增） |
 
 ### 每周自动筛选
 
-从 9 个上游公开种子（鱼妖 / 泥巴 / hl128k合集 / meowcf / 饭太硬 / 肥猫 / 王二小 / 摸鱼儿）拉取、实测、去重后补充。直连采集源优先，秒播/爬虫类最多 8 个兜底，总量不超过 30。
+从 tvbox.org 自动合并接口（`TVboxorg/Tvbox` 的 `dist/official.json`，每日探测 38 个上游）拉取、实测、去重后补充直连采集源。已彻底关闭爬虫/秒播源（依赖加密 jar、国内不稳定），接口保持纯直连、稳定可靠。
 
 ## 如何手动换血 / 测试
 
