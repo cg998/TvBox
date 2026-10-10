@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 *.log
 dist/deployed_interface.json
+dist/report.md
+dist/health_report.md
