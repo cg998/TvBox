@@ -48,6 +48,7 @@
       "TongQu", "TuXiaoBei", "BeiLeHu",
       "Duboku", "New6v", "Web1905", "Gz360", "MeijuMi", "ShuangXing", "Yidong4K", "AppLY", "YST",
       "Feiyu", "FengYe", "RenRen", "Jike", "Hxq", "Jpys", "App99", "AppGet", "Czsapp",
+      "Gulu", "Ikanbot", "XBPQ", "Wwys", "AppDrama", "AppQi", "AppRJ", "AppYQK", "App3Q", "YunDuo",
       "GuiGui", "ShortWeiguan", "ShortXingya", "ShortQimao", "ShortHaokan", "ShortHema",
       "Sports88", "SportsGuazi", "SportsKafei", "SportsFeiqiu",
       "YGP"
@@ -55,12 +56,12 @@
     "deny_classes": [
       "AiPan", "KKPan", "MiPan", "Pan123", "PanAli", "PanBaidu", "PanGuangya",
       "PanQuark", "PanSou", "PanTianyi", "PanUC", "PanWebShare", "PanWebShareHJ",
-      "PanXunlei", "QuPanSo", "SeedHub", "XBPQ", "Xunlei8", "4KZhinan", "Ikanbot",
+      "PanXunlei", "QuPanSo", "SeedHub", "Xunlei8", "4KZhinan",
       "Djuu", "QingtingFM", "TingBokan", "TingJinxia", "TingShijie", "SaoHuo",
       "Config", "LocalFile", "Push"
     ],
     "drop_name_keywords": ["网盘", "云盘", "阿里", "夸克", "迅雷", "百度", "听书", "音乐", "有声", "电台", "广播"],
-    "max_sites": 34,
+    "max_sites": 60,
     "output": "dist/spider_pack.json"
   },
   "options": {
