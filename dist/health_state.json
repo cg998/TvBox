@@ -13,5 +13,20 @@
     "fails": 4,
     "last_fail": "2026-10-13",
     "name": "TVB云播影视"
+  },
+  "csp_Glod|": {
+    "fails": 1,
+    "last_fail": "2026-10-14",
+    "name": "金牌 | 影视"
+  },
+  "csp_XuanFeng|": {
+    "fails": 1,
+    "last_fail": "2026-10-14",
+    "name": "旋风影视"
+  },
+  "csp_ChangZhang|https://www.czzy.site/": {
+    "fails": 1,
+    "last_fail": "2026-10-14",
+    "name": "厂长影视"
   }
 }
