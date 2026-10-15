@@ -874,16 +874,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "Libvio",
-      "name": "立播影视",
-      "type": 3,
-      "api": "csp_Libvio",
-      "searchable": 1,
-      "filterable": 0,
-      "ext": "{        \"site\": \"https://www.libvio.app\"      }",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "XuanFeng",
       "name": "旋风影视",
       "type": 3,
@@ -891,6 +881,16 @@
       "searchable": 1,
       "changeable": 1,
       "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "Libvio",
+      "name": "立播影视",
+      "type": 3,
+      "api": "csp_Libvio",
+      "searchable": 1,
+      "filterable": 0,
+      "ext": "{        \"site\": \"https://www.libvio.app\"      }",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
