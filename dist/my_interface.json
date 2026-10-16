@@ -24,13 +24,6 @@
       "filterable": 0
     },
     {
-      "key": "枫叶影视",
-      "name": "枫叶 • 影视",
-      "type": 3,
-      "api": "csp_FengYe",
-      "ext": "https://www.vip1949.com/"
-    },
-    {
       "key": "双星",
       "name": "双星 • 4K",
       "type": 3,
@@ -835,16 +828,6 @@
       "searchable": 0
     },
     {
-      "key": "DianYingYunJi",
-      "name": "电影云集",
-      "type": 3,
-      "api": "csp_DianYingYunJi",
-      "searchable": 1,
-      "changeable": 1,
-      "ext": {},
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "NCat",
       "name": "网飞猫影视",
       "type": 3,
@@ -909,6 +892,16 @@
       "api": "csp_Glod",
       "searchable": 1,
       "changeable": 0,
+      "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "DianYingYunJi",
+      "name": "电影云集",
+      "type": 3,
+      "api": "csp_DianYingYunJi",
+      "searchable": 1,
+      "changeable": 1,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
