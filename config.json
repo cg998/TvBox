@@ -8,7 +8,8 @@
   "homepage": {
     "_说明": "首页 + 站点排序。preferred_class 的秒播类顶到 sites[0] 作首页(App 打开显示的站, 应选分类齐全的站, 父母靠首页分类浏览); priority_classes 里的秒播类整体排到「直连源」之前 —— 注意: 这只影响【站点列表/浏览顺序】。FongMi 搜索是【每个站一返回就追加一组】, 按各站返回先后展示、无相关度排序, 所以本顺序【不影响搜索结果顺序】; 想让某站不出现在搜索里须给它写 searchable:0。fallback_key 是首页源不可用时 health_check 回退到的站(默认量子, 自用直连)。留空 preferred_class 则维持 my_sites.json 第一个(=量子)。",
     "preferred_class": "Duboku",
-    "priority_classes": ["Duboku", "Gz360", "Web1905", "FengYe", "ShuangXing", "RenRen", "Jike", "Yidong4K"],
+    "priority_classes": ["Duboku", "Gz360", "ShuangXing", "FengYe", "Web1905", "RenRen", "Jike", "Yidong4K"],
+    "_港剧粤语说明": "有港剧/粤语分类的秒播站前置: Duboku(独播,29分类含「港剧」独立分类)、Gz360(瓜子,360影视聚合,电视剧含「TVB」+「香港」地区)、ShuangXing(双星,含「港剧」)。Web1905(1905电影网,以电影为主无港剧)已后移。",
     "fallback_key": "lzzy"
   },
   "spider_pack": {
