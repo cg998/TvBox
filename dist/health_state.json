@@ -5,13 +5,13 @@
     "name": "枫叶 • 影视"
   },
   "csp_Jpys|https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn": {
-    "fails": 5,
-    "last_fail": "2026-10-14",
+    "fails": 6,
+    "last_fail": "2026-10-18",
     "name": "金牌 • 影视"
   },
   "csp_HkTv|http://www.hktvyb.vip/": {
-    "fails": 5,
-    "last_fail": "2026-10-14",
+    "fails": 6,
+    "last_fail": "2026-10-18",
     "name": "TVB云播影视"
   },
   "csp_Glod|": {
@@ -25,8 +25,8 @@
     "name": "旋风影视"
   },
   "csp_ChangZhang|https://www.czzy.site/": {
-    "fails": 1,
-    "last_fail": "2026-10-14",
+    "fails": 2,
+    "last_fail": "2026-10-18",
     "name": "厂长影视"
   },
   "csp_Ysj|": {

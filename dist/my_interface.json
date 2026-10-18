@@ -821,13 +821,6 @@
       "searchable": 0
     },
     {
-      "key": "金牌影视",
-      "name": "金牌 • 影视",
-      "type": 3,
-      "api": "csp_Jpys",
-      "ext": "https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
-    },
-    {
       "key": "DianYingYunJi",
       "name": "电影云集",
       "type": 3,
@@ -847,17 +840,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "ChangZhang",
-      "name": "厂长影视",
-      "type": 3,
-      "api": "csp_ChangZhang",
-      "searchable": "1",
-      "filterable": "0",
-      "changeable": 0,
-      "ext": "https://www.czzy.site/",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "Xb6v",
       "name": "新版6V视频",
       "type": 3,
@@ -874,16 +856,6 @@
       "searchable": 1,
       "filterable": 0,
       "ext": "{        \"site\": \"https://www.libvio.app\"      }",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "HkTv",
-      "name": "TVB云播影视",
-      "type": 3,
-      "api": "csp_HkTv",
-      "searchable": 0,
-      "filterable": 1,
-      "ext": "http://www.hktvyb.vip/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
@@ -913,6 +885,17 @@
       "searchable": 1,
       "changeable": 0,
       "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "ChangZhang",
+      "name": "厂长影视",
+      "type": 3,
+      "api": "csp_ChangZhang",
+      "searchable": "1",
+      "filterable": "0",
+      "changeable": 0,
+      "ext": "https://www.czzy.site/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],
