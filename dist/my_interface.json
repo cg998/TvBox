@@ -859,16 +859,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "XuanFeng",
-      "name": "旋风影视",
-      "type": 3,
-      "api": "csp_XuanFeng",
-      "searchable": 1,
-      "changeable": 1,
-      "ext": {},
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "Ysj",
       "name": "异世界动漫(不稳定)",
       "type": 3,
@@ -888,14 +878,13 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "ChangZhang",
-      "name": "厂长影视",
+      "key": "XuanFeng",
+      "name": "旋风影视",
       "type": 3,
-      "api": "csp_ChangZhang",
-      "searchable": "1",
-      "filterable": "0",
-      "changeable": 0,
-      "ext": "https://www.czzy.site/",
+      "api": "csp_XuanFeng",
+      "searchable": 1,
+      "changeable": 1,
+      "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],

@@ -20,13 +20,13 @@
     "name": "金牌 | 影视"
   },
   "csp_XuanFeng|": {
-    "fails": 1,
-    "last_fail": "2026-10-14",
+    "fails": 2,
+    "last_fail": "2026-10-20",
     "name": "旋风影视"
   },
   "csp_ChangZhang|https://www.czzy.site/": {
-    "fails": 2,
-    "last_fail": "2026-10-18",
+    "fails": 3,
+    "last_fail": "2026-10-20",
     "name": "厂长影视"
   },
   "csp_Ysj|": {
