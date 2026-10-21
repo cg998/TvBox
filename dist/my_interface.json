@@ -44,16 +44,6 @@
       "filterable": 0
     },
     {
-      "key": "人人",
-      "name": "人人 • 4K",
-      "type": 3,
-      "api": "csp_RenRen",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
-    },
-    {
       "key": "即刻",
       "name": "即刻 • 4K",
       "type": 3,
@@ -158,6 +148,12 @@
       "filterable": 1
     },
     {
+      "key": "cj_采集",
+      "name": "🧞旺旺",
+      "type": 1,
+      "api": "https://api.wsyzy.net/api.php/provide/vod"
+    },
+    {
       "key": "光速资源",
       "name": "🌼光速┃资源🌼",
       "type": 1,
@@ -175,24 +171,12 @@
       "filterable": 1
     },
     {
-      "key": "cj_暴风资源",
-      "name": "🧞暴风┃短剧",
+      "key": "茅台资源",
+      "name": "🌼茅台┃影视🌼",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "searchable": 0,
-      "quickSearch": 1,
-      "filterable": 1,
-      "playerType": 2,
-      "categories": [
-        "反转爽文",
-        "穿越年代",
-        "重生民国",
-        "现代言情",
-        "女恋总裁",
-        "都市脑洞",
-        "闪婚离婚",
-        "古装仙侠"
-      ]
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+      "searchable": 1,
+      "changeable": 1
     },
     {
       "key": "虎牙",
@@ -201,28 +185,6 @@
       "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
       "searchable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "极速资源",
-      "name": "🌼极速┃资源🌼",
-      "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "金鹰资源",
-      "name": "🌼金鹰┃资源🌼",
-      "type": 1,
-      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "cj_采集",
-      "name": "🧞旺旺",
-      "type": 1,
-      "api": "https://api.wsyzy.net/api.php/provide/vod"
     },
     {
       "key": "tv_back-023_csp_非凡资源",
@@ -262,6 +224,34 @@
       ]
     },
     {
+      "key": "cj_暴风资源",
+      "name": "🧞暴风┃短剧",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "searchable": 0,
+      "quickSearch": 1,
+      "filterable": 1,
+      "playerType": 2,
+      "categories": [
+        "反转爽文",
+        "穿越年代",
+        "重生民国",
+        "现代言情",
+        "女恋总裁",
+        "都市脑洞",
+        "闪婚离婚",
+        "古装仙侠"
+      ]
+    },
+    {
+      "key": "极速资源",
+      "name": "🌼极速┃资源🌼",
+      "type": 1,
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "tv_back-023_量子资源",
       "name": "🥑┃量子┃资源·ok线路1",
       "type": 1,
@@ -288,6 +278,14 @@
       ]
     },
     {
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
+      "type": 1,
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "豆瓣资源",
       "name": "🌼豆瓣┃影视🌼",
       "type": 1,
@@ -304,20 +302,11 @@
       "quickSearch": 1
     },
     {
-      "key": "茅台资源",
-      "name": "🌼茅台┃影视🌼",
-      "type": 1,
-      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
-      "key": "裤佬JS聚合",
-      "name": "采集┃聚合",
+      "key": "采集集合",
+      "name": "采集集合+",
       "type": 4,
       "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
-      "searchable": 1,
-      "changeable": 1
+      "ext": "0"
     },
     {
       "key": "兔小贝",
@@ -400,6 +389,13 @@
       "name": "韩圈 • APP",
       "type": 3,
       "api": "csp_Hxq"
+    },
+    {
+      "key": "金牌影视",
+      "name": "金牌 • 影视",
+      "type": 3,
+      "api": "csp_Jpys",
+      "ext": "https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
     },
     {
       "key": "剧圈99",
@@ -821,6 +817,16 @@
       "searchable": 0
     },
     {
+      "key": "鬼鬼",
+      "name": "鬼鬼 • 搜索",
+      "type": 3,
+      "api": "csp_GuiGui",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0,
+      "timeout": 60
+    },
+    {
       "key": "DianYingYunJi",
       "name": "电影云集",
       "type": 3,
@@ -837,6 +843,17 @@
       "api": "csp_NCat",
       "searchable": 1,
       "filterable": 1,
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "ChangZhang",
+      "name": "厂长影视",
+      "type": 3,
+      "api": "csp_ChangZhang",
+      "searchable": "1",
+      "filterable": "0",
+      "changeable": 0,
+      "ext": "https://www.czzy.site/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
@@ -859,6 +876,26 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
+      "key": "HkTv",
+      "name": "TVB云播影视",
+      "type": 3,
+      "api": "csp_HkTv",
+      "searchable": 0,
+      "filterable": 1,
+      "ext": "http://www.hktvyb.vip/",
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "XuanFeng",
+      "name": "旋风影视",
+      "type": 3,
+      "api": "csp_XuanFeng",
+      "searchable": 1,
+      "changeable": 1,
+      "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
       "key": "Ysj",
       "name": "异世界动漫(不稳定)",
       "type": 3,
@@ -876,19 +913,9 @@
       "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "XuanFeng",
-      "name": "旋风影视",
-      "type": 3,
-      "api": "csp_XuanFeng",
-      "searchable": 1,
-      "changeable": 1,
-      "ext": {},
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],
-  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;708a0bc07aedf1c4d86c47afd23c036b",
+  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;4a35e9a49f5872ea0a4358e5424e657a",
   "parses": [
     {
       "name": "王",
@@ -1981,10 +2008,6 @@
       "name": "16万•MV",
       "type": 0,
       "url": "https://gh.tryxd.cn/raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt"
-    },
-    {
-      "name": "直播源",
-      "type": 0
     }
   ],
   "ads": [
