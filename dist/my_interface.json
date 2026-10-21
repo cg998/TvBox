@@ -839,17 +839,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "ChangZhang",
-      "name": "厂长影视",
-      "type": 3,
-      "api": "csp_ChangZhang",
-      "searchable": "1",
-      "filterable": "0",
-      "changeable": 0,
-      "ext": "https://www.czzy.site/",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "Xb6v",
       "name": "新版6V视频",
       "type": 3,
@@ -869,12 +858,12 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "XuanFeng",
-      "name": "旋风影视",
+      "key": "glod",
+      "name": "金牌 | 影视",
       "type": 3,
-      "api": "csp_XuanFeng",
+      "api": "csp_Glod",
       "searchable": 1,
-      "changeable": 1,
+      "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
@@ -885,16 +874,6 @@
       "api": "csp_Ysj",
       "searchable": 1,
       "filterable": 1,
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "glod",
-      "name": "金牌 | 影视",
-      "type": 3,
-      "api": "csp_Glod",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],

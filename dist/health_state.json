@@ -20,18 +20,18 @@
     "name": "金牌 | 影视"
   },
   "csp_XuanFeng|": {
-    "fails": 2,
-    "last_fail": "2026-10-20",
+    "fails": 3,
+    "last_fail": "2026-10-22",
     "name": "旋风影视"
   },
   "csp_ChangZhang|https://www.czzy.site/": {
-    "fails": 3,
-    "last_fail": "2026-10-20",
+    "fails": 4,
+    "last_fail": "2026-10-22",
     "name": "厂长影视"
   },
   "csp_Ysj|": {
-    "fails": 1,
-    "last_fail": "2026-10-15",
+    "fails": 2,
+    "last_fail": "2026-10-22",
     "name": "异世界动漫(不稳定)"
   },
   "csp_Libvio|{        \"site\": \"https://www.libvio.app\"      }": {
