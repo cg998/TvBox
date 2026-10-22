@@ -28,13 +28,6 @@
       "timeout": 60
     },
     {
-      "key": "枫叶影视",
-      "name": "枫叶 • 影视",
-      "type": 3,
-      "api": "csp_FengYe",
-      "ext": "https://www.vip1949.com/"
-    },
-    {
       "key": "1905",
       "name": "1905 • 影视",
       "type": 3,
