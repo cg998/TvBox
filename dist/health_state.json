@@ -30,8 +30,8 @@
     "name": "厂长影视"
   },
   "csp_Ysj|": {
-    "fails": 2,
-    "last_fail": "2026-10-22",
+    "fails": 3,
+    "last_fail": "2026-10-24",
     "name": "异世界动漫(不稳定)"
   },
   "csp_Libvio|{        \"site\": \"https://www.libvio.app\"      }": {
@@ -43,5 +43,25 @@
     "fails": 1,
     "last_fail": "2026-10-17",
     "name": "电影云集"
+  },
+  "caiji.dbzy5.com/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-10-24",
+    "name": "🌼豆瓣┃影视🌼"
+  },
+  "www.huyaapi.com/api.php/provide/vod/from/hym3u8": {
+    "fails": 1,
+    "last_fail": "2026-10-24",
+    "name": "🌼虎牙┃采集🌼"
+  },
+  "api.guangsuapi.com/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-10-24",
+    "name": "🌼光速┃资源🌼"
+  },
+  "jyzyapi.com/provide/vod/from/jinyingm3u8/at/json": {
+    "fails": 1,
+    "last_fail": "2026-10-24",
+    "name": "🌼金鹰┃资源🌼"
   }
 }

@@ -147,14 +147,6 @@
       "api": "https://api.wsyzy.net/api.php/provide/vod"
     },
     {
-      "key": "光速资源",
-      "name": "🌼光速┃资源🌼",
-      "type": 1,
-      "api": "https://api.guangsuapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "魔都资源",
       "name": "🌼魔都┃影视🌼",
       "type": 1,
@@ -170,14 +162,6 @@
       "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1
-    },
-    {
-      "key": "虎牙",
-      "name": "🌼虎牙┃采集🌼",
-      "type": 1,
-      "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
-      "searchable": 1,
-      "quickSearch": 1
     },
     {
       "key": "tv_back-023_csp_非凡资源",
@@ -269,22 +253,6 @@
         "爱情片",
         "喜剧片"
       ]
-    },
-    {
-      "key": "金鹰资源",
-      "name": "🌼金鹰┃资源🌼",
-      "type": 1,
-      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "豆瓣资源",
-      "name": "🌼豆瓣┃影视🌼",
-      "type": 1,
-      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1
     },
     {
       "key": "如意资源",
@@ -861,13 +829,36 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "Ysj",
-      "name": "异世界动漫(不稳定)",
-      "type": 3,
-      "api": "csp_Ysj",
+      "key": "光速资源",
+      "name": "🌼光速┃资源🌼",
+      "type": 1,
+      "api": "https://api.guangsuapi.com/api.php/provide/vod/",
       "searchable": 1,
-      "filterable": 1,
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+      "quickSearch": 1
+    },
+    {
+      "key": "虎牙",
+      "name": "🌼虎牙┃采集🌼",
+      "type": 1,
+      "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
+      "type": 1,
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "豆瓣资源",
+      "name": "🌼豆瓣┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;4a35e9a49f5872ea0a4358e5424e657a",
