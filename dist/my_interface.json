@@ -28,13 +28,6 @@
       "timeout": 60
     },
     {
-      "key": "枫叶影视",
-      "name": "枫叶 • 影视",
-      "type": 3,
-      "api": "csp_FengYe",
-      "ext": "https://www.vip1949.com/"
-    },
-    {
       "key": "1905",
       "name": "1905 • 影视",
       "type": 3,
@@ -856,13 +849,6 @@
       "searchable": 0
     },
     {
-      "key": "金牌影视",
-      "name": "金牌 • 影视",
-      "type": 3,
-      "api": "csp_Jpys",
-      "ext": "https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
-    },
-    {
       "key": "DianYingYunJi",
       "name": "电影云集",
       "type": 3,
@@ -909,16 +895,6 @@
       "searchable": 1,
       "filterable": 0,
       "ext": "{        \"site\": \"https://www.libvio.app\"      }",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "HkTv",
-      "name": "TVB云播影视",
-      "type": 3,
-      "api": "csp_HkTv",
-      "searchable": 0,
-      "filterable": 1,
-      "ext": "http://www.hktvyb.vip/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
