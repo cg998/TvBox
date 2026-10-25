@@ -15,8 +15,8 @@
     "name": "TVB云播影视"
   },
   "csp_Glod|": {
-    "fails": 2,
-    "last_fail": "2026-10-15",
+    "fails": 3,
+    "last_fail": "2026-10-26",
     "name": "金牌 | 影视"
   },
   "csp_XuanFeng|": {
@@ -30,8 +30,8 @@
     "name": "厂长影视"
   },
   "csp_Ysj|": {
-    "fails": 3,
-    "last_fail": "2026-10-24",
+    "fails": 4,
+    "last_fail": "2026-10-26",
     "name": "异世界动漫(不稳定)"
   },
   "csp_Libvio|{        \"site\": \"https://www.libvio.app\"      }": {

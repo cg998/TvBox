@@ -906,25 +906,6 @@
       "changeable": 1,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "Ysj",
-      "name": "异世界动漫(不稳定)",
-      "type": 3,
-      "api": "csp_Ysj",
-      "searchable": 1,
-      "filterable": 1,
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "glod",
-      "name": "金牌 | 影视",
-      "type": 3,
-      "api": "csp_Glod",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": {},
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;c1978e5cec469f66f07efd37d39ec26a",
