@@ -43,5 +43,10 @@
     "fails": 1,
     "last_fail": "2026-10-17",
     "name": "电影云集"
+  },
+  "zhangqun1818.serv00.net/cj/cjjh.php": {
+    "fails": 1,
+    "last_fail": "2026-10-27",
+    "name": "采集┃聚合"
   }
 }
