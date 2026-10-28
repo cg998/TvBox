@@ -803,16 +803,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "XuanFeng",
-      "name": "旋风影视",
-      "type": 3,
-      "api": "csp_XuanFeng",
-      "searchable": 1,
-      "changeable": 1,
-      "ext": {},
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "NCat",
       "name": "网飞猫影视",
       "type": 3,
