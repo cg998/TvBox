@@ -48,5 +48,10 @@
     "fails": 1,
     "last_fail": "2026-10-28",
     "name": "网飞猫影视"
+  },
+  "caiji.dbzy5.com/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-10-29",
+    "name": "🌼豆瓣┃影视🌼"
   }
 }

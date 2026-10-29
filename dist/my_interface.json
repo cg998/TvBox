@@ -164,14 +164,6 @@
       "changeable": 1
     },
     {
-      "key": "豆瓣资源",
-      "name": "🌼豆瓣┃影视🌼",
-      "type": 1,
-      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "虎牙",
       "name": "🌼虎牙┃采集🌼",
       "type": 1,
@@ -820,6 +812,14 @@
       "filterable": 0,
       "ext": "{        \"site\": \"https://www.libvio.app\"      }",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "豆瓣资源",
+      "name": "🌼豆瓣┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.dbzy5.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;c1978e5cec469f66f07efd37d39ec26a",
