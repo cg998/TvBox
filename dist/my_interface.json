@@ -28,6 +28,13 @@
       "timeout": 60
     },
     {
+      "key": "枫叶影视",
+      "name": "枫叶 • 影视",
+      "type": 3,
+      "api": "csp_FengYe",
+      "ext": "https://www.vip1949.com/"
+    },
+    {
       "key": "1905",
       "name": "1905 • 影视",
       "type": 3,
@@ -141,10 +148,55 @@
       "filterable": 1
     },
     {
-      "key": "cj_采集",
-      "name": "🧞旺旺",
+      "key": "wsycj",
+      "name": "采集",
       "type": 1,
-      "api": "https://api.wsyzy.net/api.php/provide/vod"
+      "api": "https://api.wsyzy.net/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "categories": [
+        "4K电影",
+        "Netflix电影",
+        "Netflix自制剧",
+        "邵氏电影",
+        "演唱会",
+        "动作片",
+        "喜剧片",
+        "爱情片",
+        "科幻片",
+        "恐怖片",
+        "剧情片",
+        "战争片",
+        "记录片",
+        "动画片",
+        "国产剧",
+        "欧美剧",
+        "韩剧",
+        "日剧",
+        "港剧",
+        "台剧",
+        "泰剧",
+        "海外剧",
+        "大陆综艺",
+        "日韩综艺",
+        "港台综艺",
+        "欧美综艺",
+        "国产动漫",
+        "日韩动漫",
+        "欧美动漫",
+        "港台动漫",
+        "海外动漫",
+        "有声动漫",
+        "女频恋爱",
+        "反转爽剧",
+        "古装仙侠",
+        "年代穿越",
+        "脑洞悬疑",
+        "现代都市",
+        "擦边短剧",
+        "漫剧"
+      ]
     },
     {
       "key": "魔都资源",
@@ -156,20 +208,69 @@
       "filterable": 1
     },
     {
-      "key": "茅台资源",
-      "name": "🌼茅台┃影视🌼",
-      "type": 1,
-      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
       "key": "虎牙",
       "name": "🌼虎牙┃采集🌼",
       "type": 1,
       "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
       "searchable": 1,
       "quickSearch": 1
+    },
+    {
+      "key": "cj_暴风资源",
+      "name": "🧞暴风┃短剧",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "searchable": 0,
+      "quickSearch": 1,
+      "filterable": 1,
+      "playerType": 2,
+      "categories": [
+        "反转爽文",
+        "穿越年代",
+        "重生民国",
+        "现代言情",
+        "女恋总裁",
+        "都市脑洞",
+        "闪婚离婚",
+        "古装仙侠"
+      ]
+    },
+    {
+      "key": "tv_back-023_csp_非凡资源",
+      "name": "🥗┃非凡┃资源·ok线路1",
+      "type": 1,
+      "api": "http://ffzy1.tv/api.php/provide/vod/",
+      "playurl": "json:http://jx.84jia.com/m3u8ts.php?url=",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "categories": [
+        "动作片",
+        "喜剧片",
+        "科幻片",
+        "恐怖片",
+        "爱情片",
+        "剧情片",
+        "战争片",
+        "记录片",
+        "国产剧",
+        "欧美剧",
+        "香港剧",
+        "韩国剧",
+        "台湾剧",
+        "日本剧",
+        "海外剧",
+        "泰国剧",
+        "国产动漫",
+        "日韩动漫",
+        "欧美动漫",
+        "港台动漫",
+        "海外动漫",
+        "大陆综艺",
+        "港台综艺",
+        "日韩综艺",
+        "欧美综艺"
+      ]
     },
     {
       "key": "极速资源",
@@ -180,14 +281,6 @@
       "quickSearch": 1
     },
     {
-      "key": "tv_back-024_暴風",
-      "name": "🦔暴風┃采集·荐片",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
       "key": "金鹰资源",
       "name": "🌼金鹰┃资源🌼",
       "type": 1,
@@ -196,64 +289,44 @@
       "quickSearch": 1
     },
     {
-      "key": "非凡资源",
-      "name": "🌼非凡┃资源🌼",
+      "key": "tv_back-023_taopian",
+      "name": "🕹️淘片┃采集·ok线路1",
       "type": 1,
-      "api": "http://ffzy1.tv/api.php/provide/vod/",
+      "api": "https://taopianapi.com/cjapi/mc/vod/json.html",
       "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "tv_back-023_量子资源",
-      "name": "🥑┃量子┃资源·ok线路1",
-      "type": 1,
-      "api": "https://lzizy1.com/api.php/provide/vod/",
-      "playurl": "json:http://jx.84jia.com/m3u8ts.php?url=",
-      "searchable": 1,
-      "quickSearch": 1,
       "filterable": 0,
       "categories": [
-        "国产剧",
-        "国产动漫",
-        "泰国剧",
-        "台湾剧",
-        "香港剧",
-        "欧美剧",
-        "韩国剧",
-        "日本剧",
-        "动漫",
-        "体育",
-        "剧情片",
-        "动作片",
-        "爱情片",
-        "喜剧片"
+        "动漫/国产动漫",
+        "动漫/日本动漫",
+        "动漫/欧美动漫",
+        "动漫/海外动漫",
+        "综艺/大陆综艺",
+        "综艺/港台综艺",
+        "综艺/日韩综艺",
+        "综艺/欧美综艺",
+        "综艺/海外综艺",
+        "电视剧/国产剧",
+        "电视剧/香港剧",
+        "电视剧/欧美剧",
+        "电视剧/海外剧",
+        "电视剧/韩国剧",
+        "电视剧/日本剧",
+        "电视剧/泰国剧",
+        "电视剧/台湾剧",
+        "电影/战争片",
+        "电影/科幻片",
+        "电影/奇幻片",
+        "电影/冒险片",
+        "电影/动画片",
+        "电影/喜剧片",
+        "电影/动作片",
+        "电影/爱情片",
+        "电影/恐怖片",
+        "电影/惊悚片",
+        "电影/剧情片",
+        "电影/悬疑片",
+        "电影/纪录片"
       ]
-    },
-    {
-      "key": "tv_back-012_ruyi",
-      "name": "🍀┃如意┃资源·二月红接口",
-      "type": 1,
-      "api": "https://cj.rycjapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "categories": [
-        "韩国剧",
-        "欧美剧",
-        "台湾剧",
-        "战争片",
-        "国产剧",
-        "大陆综艺"
-      ],
-      "hide": 1
-    },
-    {
-      "key": "采集集合",
-      "name": "采集集合+",
-      "type": 4,
-      "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
-      "ext": "0"
     },
     {
       "key": "光速资源",
@@ -262,6 +335,30 @@
       "api": "https://api.guangsuapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1
+    },
+    {
+      "key": "如意资源",
+      "name": "🌼如意┃影视🌼",
+      "type": 1,
+      "api": "http://cj.rycjapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "茅台资源",
+      "name": "🌼茅台┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+      "searchable": 1,
+      "changeable": 1
+    },
+    {
+      "key": "裤佬JS聚合",
+      "name": "采集┃聚合",
+      "type": 4,
+      "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
+      "searchable": 1,
+      "changeable": 1
     },
     {
       "key": "兔小贝",
@@ -498,24 +595,6 @@
       }
     },
     {
-      "key": "巴士动漫",
-      "name": "巴士 • 动漫",
-      "type": 3,
-      "api": "csp_XBPQ",
-      "ext": {
-        "请求头": "User-Agent$MOBILE_UA#Accept$text/html#accept-language$zh-CN,zh;q=0.8",
-        "分类url": "https://dmbus.cc/show-{cateId}--{by}-{class}--{year}-{catePg}.html",
-        "分类": "国漫$1#日漫$2#欧美动漫$3#电影$4",
-        "数组": "class=\"item\">&&</li>",
-        "简介": "剧情：&&</p>",
-        "标题": "title=\"&&在线观看\"",
-        "副标题": "desc\">&&</span>",
-        "图片": "data-bg=\"&&\"",
-        "搜索url": "https://dmbus.cc/s----------.html?wd={wd}",
-        "倒序": "1"
-      }
-    },
-    {
       "key": "旺旺影视",
       "name": "旺旺 • 影视",
       "type": 3,
@@ -553,12 +632,12 @@
       "ext": {
         "appName": "橘汁",
         "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCr8SzZhjYy+rsya1K09t8d2K50pWFoBkgUqMpKOiW+3IEVKd4eTdvg9RSOjQ82kypL6R9BnsmrS1V8s4PVDwjQbUtYhTPPC9Hz16qY7rpD6m0d2vr09/UpWQ5uOy9PR0QTrsioveZ+DIe9jc3C+zBCu/kZSY/R8stwJoiitki3gwIDAQAB",
-        "dataKey": "OW1WBLFZCLJ0WTNJQMRSZ2DYSGNBPT0=",
+        "dataKey": "ZU1DSFFWNENKMDYXVUQRN0ZJDUC4PQ==",
         "dataIv": "OC1A06E197EF10CF3F6058CA7A803B5E",
-        "pkg": "com.mxj.wylcjbxyx",
+        "pkg": "com.asjdhjhd.mgd.p3",
         "host": "",
         "site": "https://123-1349250429.cos.ap-shanghai.myqcloud.com/app.txt",
-        "version": "3.0.2.4",
+        "version": "3.0.7.0",
         "decrypt": "1"
       }
     },
@@ -765,6 +844,13 @@
       "searchable": 0
     },
     {
+      "key": "金牌影视",
+      "name": "金牌 • 影视",
+      "type": 3,
+      "api": "csp_Jpys",
+      "ext": "https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
+    },
+    {
       "key": "DianYingYunJi",
       "name": "电影云集",
       "type": 3,
@@ -772,6 +858,15 @@
       "searchable": 1,
       "changeable": 1,
       "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "NCat",
+      "name": "网飞猫影视",
+      "type": 3,
+      "api": "csp_NCat",
+      "searchable": 1,
+      "filterable": 1,
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
@@ -795,15 +890,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "NCat",
-      "name": "网飞猫影视",
-      "type": 3,
-      "api": "csp_NCat",
-      "searchable": 1,
-      "filterable": 1,
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "Libvio",
       "name": "立播影视",
       "type": 3,
@@ -812,9 +898,48 @@
       "filterable": 0,
       "ext": "{        \"site\": \"https://www.libvio.app\"      }",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "HkTv",
+      "name": "TVB云播影视",
+      "type": 3,
+      "api": "csp_HkTv",
+      "searchable": 0,
+      "filterable": 1,
+      "ext": "http://www.hktvyb.vip/",
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "Ysj",
+      "name": "异世界动漫(不稳定)",
+      "type": 3,
+      "api": "csp_Ysj",
+      "searchable": 1,
+      "filterable": 1,
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "glod",
+      "name": "金牌 | 影视",
+      "type": 3,
+      "api": "csp_Glod",
+      "searchable": 1,
+      "changeable": 0,
+      "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "XuanFeng",
+      "name": "旋风影视",
+      "type": 3,
+      "api": "csp_XuanFeng",
+      "searchable": 1,
+      "changeable": 1,
+      "ext": {},
+      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],
-  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;c1978e5cec469f66f07efd37d39ec26a",
+  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;4e4e7408ede9d8c782ba7a3e7fae32ae",
   "parses": [
     {
       "name": "王",
@@ -1844,7 +1969,7 @@
     {
       "name": "平台直播",
       "type": 0,
-      "url": "http://47.120.41.246:8025/vip/jar/zb.php",
+      "url": "http://118.89.172.248:8025/jar/zb.php",
       "playerType": 1
     },
     {
@@ -1906,10 +2031,6 @@
       "name": "16万•MV",
       "type": 0,
       "url": "https://gh.tryxd.cn/raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt"
-    },
-    {
-      "name": "直播源",
-      "type": 0
     }
   ],
   "ads": [
