@@ -53,5 +53,10 @@
     "fails": 3,
     "last_fail": "2026-10-31",
     "name": "🌼豆瓣┃影视🌼"
+  },
+  "zhangqun1818.serv00.net/cj/cjjh.php": {
+    "fails": 1,
+    "last_fail": "2026-11-06",
+    "name": "采集集合+"
   }
 }
