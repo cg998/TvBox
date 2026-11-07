@@ -141,14 +141,6 @@
       "filterable": 1
     },
     {
-      "key": "茅台资源",
-      "name": "🌼茅台┃影视🌼",
-      "type": 1,
-      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
       "key": "虎牙",
       "name": "🌼虎牙┃采集🌼",
       "type": 1,
@@ -896,6 +888,14 @@
         "日韩综艺",
         "欧美综艺"
       ]
+    },
+    {
+      "key": "茅台资源",
+      "name": "🌼茅台┃影视🌼",
+      "type": 1,
+      "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
+      "searchable": 1,
+      "changeable": 1
     },
     {
       "key": "采集集合",
