@@ -890,19 +890,19 @@
       ]
     },
     {
+      "key": "采集集合",
+      "name": "采集集合+",
+      "type": 4,
+      "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
+      "ext": "0"
+    },
+    {
       "key": "茅台资源",
       "name": "🌼茅台┃影视🌼",
       "type": 1,
       "api": "https://caiji.maotaizy.cc/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1
-    },
-    {
-      "key": "采集集合",
-      "name": "采集集合+",
-      "type": 4,
-      "api": "http://zhangqun1818.serv00.net/cj/cjjh.php",
-      "ext": "0"
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;c6c7cbd14359dee31a97abb7ec27df19",
