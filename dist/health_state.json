@@ -58,5 +58,10 @@
     "fails": 2,
     "last_fail": "2026-11-08",
     "name": "🌼茅台┃影视🌼"
+  },
+  "ffzy1.tv/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-11-10",
+    "name": "🥗┃非凡┃资源·ok线路1"
   }
 }
