@@ -154,15 +154,6 @@
       "api": "https://api.wsyzy.net/api.php/provide/vod"
     },
     {
-      "key": "魔都资源",
-      "name": "🌼魔都┃影视🌼",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
       "key": "cj_暴风资源",
       "name": "🧞暴风┃短剧",
       "type": 1,
@@ -872,6 +863,15 @@
       "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "魔都资源",
+      "name": "🌼魔都┃影视🌼",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;c25d34b0cfc044cd1ab3f225097ea7fd",
