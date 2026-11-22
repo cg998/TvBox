@@ -150,6 +150,12 @@
       "filterable": 1
     },
     {
+      "key": "cj_采集",
+      "name": "🧞旺旺",
+      "type": 1,
+      "api": "https://api.wsyzy.net/api.php/provide/vod"
+    },
+    {
       "key": "cj_暴风资源",
       "name": "🧞暴风┃短剧",
       "type": 1,
@@ -178,10 +184,10 @@
       "quickSearch": 1
     },
     {
-      "key": "极速资源",
-      "name": "🌼极速┃资源🌼",
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
       "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
       "searchable": 1,
       "quickSearch": 1
     },
@@ -194,18 +200,12 @@
       "quickSearch": 1
     },
     {
-      "key": "金鹰资源",
-      "name": "🌼金鹰┃资源🌼",
+      "key": "极速资源",
+      "name": "🌼极速┃资源🌼",
       "type": 1,
-      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "cj_采集",
-      "name": "🧞旺旺",
-      "type": 1,
-      "api": "https://api.wsyzy.net/api.php/provide/vod"
     },
     {
       "key": "tv_back-023_csp_非凡资源",
@@ -400,7 +400,17 @@
       "key": "韩圈",
       "name": "韩圈 • APP",
       "type": 3,
-      "api": "csp_Hxq"
+      "api": "csp_Hxq",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "金牌影视",
+      "name": "金牌 • 影视",
+      "type": 3,
+      "api": "csp_Jpys",
+      "ext": "https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
     },
     {
       "key": "剧圈99",
@@ -464,7 +474,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
-      "ext": "https://cz01.vip"
+      "ext": "https://www.4kcz.com"
     },
     {
       "key": "咕噜",
@@ -713,13 +723,6 @@
       }
     },
     {
-      "key": "围观短剧",
-      "name": "围观 • 短剧",
-      "type": 3,
-      "api": "csp_ShortWeiguan",
-      "genre": "shortdrama"
-    },
-    {
       "key": "星芽短剧",
       "name": "星芽 • 短剧",
       "type": 3,
@@ -840,13 +843,13 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "XuanFeng",
-      "name": "旋风影视",
+      "key": "HkTv",
+      "name": "TVB云播影视",
       "type": 3,
-      "api": "csp_XuanFeng",
-      "searchable": 1,
-      "changeable": 1,
-      "ext": {},
+      "api": "csp_HkTv",
+      "searchable": 0,
+      "filterable": 1,
+      "ext": "http://www.hktvyb.vip/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
@@ -869,7 +872,7 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     }
   ],
-  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;decb609b673019e18512dc3a96b6a252",
+  "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;efdb2c1d9a2e8c26e5a74ba5f53dfc56",
   "parses": [
     {
       "name": "王",
@@ -1765,16 +1768,6 @@
       }
     },
     {
-      "name": "-zui-",
-      "type": 0,
-      "url": "https://jx.zui.cm/?url=",
-      "ext": {
-        "header": {
-          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
-        }
-      }
-    },
-    {
       "name": "巧技二",
       "type": 1,
       "url": "http://pan.qiaoji8.com/tvbox/gouzi.php?url=",
@@ -1801,6 +1794,16 @@
         ],
         "header": {
           "User-Agent": "okhttp/4.9.1"
+        }
+      }
+    },
+    {
+      "name": "-zui-",
+      "type": 0,
+      "url": "https://jx.zui.cm/?url=",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
         }
       }
     }
@@ -1892,23 +1895,6 @@
       "ua": "okHttp/Mod-1.5.0.0"
     },
     {
-      "name": "平台直播",
-      "type": 0,
-      "url": "http://118.89.172.248:8025/jar/zb.php",
-      "playerType": 1
-    },
-    {
-      "name": "Guovin",
-      "type": 0,
-      "url": "https://cdn.jsdelivr.net/gh/Guovin/iptv-api@gd/output/result.m3u"
-    },
-    {
-      "name": "港澳台",
-      "type": 0,
-      "url": "http://rihou.cc:567/gggg.nzk",
-      "playerType": 1
-    },
-    {
       "name": "24live",
       "type": 0,
       "url": "https://urlzf.zone.id/iptv-api/output/user_result.m3u",
@@ -1956,6 +1942,23 @@
       "name": "16万•MV",
       "type": 0,
       "url": "https://gh.tryxd.cn/raw.githubusercontent.com/lystv/short/main/影视/tvb/MTV.txt"
+    },
+    {
+      "name": "平台直播",
+      "type": 0,
+      "url": "http://118.89.172.248:8025/jar/zb.php",
+      "playerType": 1
+    },
+    {
+      "name": "Guovin",
+      "type": 0,
+      "url": "https://cdn.jsdelivr.net/gh/Guovin/iptv-api@gd/output/result.m3u"
+    },
+    {
+      "name": "港澳台",
+      "type": 0,
+      "url": "http://rihou.cc:567/gggg.nzk",
+      "playerType": 1
     },
     {
       "name": "直播源",
