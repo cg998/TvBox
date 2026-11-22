@@ -141,21 +141,6 @@
       "filterable": 1
     },
     {
-      "key": "魔都资源",
-      "name": "🌼魔都┃影视🌼",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "cj_采集",
-      "name": "🧞旺旺",
-      "type": 1,
-      "api": "https://api.wsyzy.net/api.php/provide/vod"
-    },
-    {
       "key": "cj_暴风资源",
       "name": "🧞暴风┃短剧",
       "type": 1,
@@ -406,13 +391,6 @@
       "filterable": 1
     },
     {
-      "key": "金牌影视",
-      "name": "金牌 • 影视",
-      "type": 3,
-      "api": "csp_Jpys",
-      "ext": "https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
-    },
-    {
       "key": "剧圈99",
       "name": "剧圈 • APP",
       "type": 3,
@@ -465,16 +443,6 @@
         "dataKey": "88689667dce61725",
         "dataIv": "88689667dce61725"
       }
-    },
-    {
-      "key": "厂长影视",
-      "name": "厂长 • 影视",
-      "type": 3,
-      "api": "csp_Czsapp",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "ext": "https://www.4kcz.com"
     },
     {
       "key": "咕噜",
@@ -843,16 +811,6 @@
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
-      "key": "HkTv",
-      "name": "TVB云播影视",
-      "type": 3,
-      "api": "csp_HkTv",
-      "searchable": 0,
-      "filterable": 1,
-      "ext": "http://www.hktvyb.vip/",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
       "key": "Ysj",
       "name": "异世界动漫(不稳定)",
       "type": 3,
@@ -870,6 +828,38 @@
       "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "魔都资源",
+      "name": "🌼魔都┃影视🌼",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "cj_采集",
+      "name": "🧞旺旺",
+      "type": 1,
+      "api": "https://api.wsyzy.net/api.php/provide/vod"
+    },
+    {
+      "key": "金牌影视",
+      "name": "金牌 • 影视",
+      "type": 3,
+      "api": "csp_Jpys",
+      "ext": "https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
+    },
+    {
+      "key": "厂长影视",
+      "name": "厂长 • 影视",
+      "type": 3,
+      "api": "csp_Czsapp",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": "https://www.4kcz.com"
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;efdb2c1d9a2e8c26e5a74ba5f53dfc56",

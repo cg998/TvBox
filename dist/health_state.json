@@ -10,8 +10,8 @@
     "name": "金牌 • 影视"
   },
   "csp_HkTv|http://www.hktvyb.vip/": {
-    "fails": 15,
-    "last_fail": "2026-11-18",
+    "fails": 16,
+    "last_fail": "2026-11-22",
     "name": "TVB云播影视"
   },
   "csp_Glod|": {
@@ -53,5 +53,25 @@
     "fails": 3,
     "last_fail": "2026-10-31",
     "name": "🌼豆瓣┃影视🌼"
+  },
+  "www.mdzyapi.com/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-11-22",
+    "name": "🌼魔都┃影视🌼"
+  },
+  "csp_Jpys|https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn": {
+    "fails": 1,
+    "last_fail": "2026-11-22",
+    "name": "金牌 • 影视"
+  },
+  "csp_Czsapp|https://www.4kcz.com": {
+    "fails": 1,
+    "last_fail": "2026-11-22",
+    "name": "厂长 • 影视"
+  },
+  "api.wsyzy.net/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-11-22",
+    "name": "🧞旺旺"
   }
 }
