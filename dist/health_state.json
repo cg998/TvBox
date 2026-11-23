@@ -54,24 +54,14 @@
     "last_fail": "2026-10-31",
     "name": "🌼豆瓣┃影视🌼"
   },
-  "www.mdzyapi.com/api.php/provide/vod": {
-    "fails": 1,
-    "last_fail": "2026-11-22",
-    "name": "🌼魔都┃影视🌼"
-  },
   "csp_Jpys|https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn": {
-    "fails": 1,
-    "last_fail": "2026-11-22",
+    "fails": 2,
+    "last_fail": "2026-11-23",
     "name": "金牌 • 影视"
   },
   "csp_Czsapp|https://www.4kcz.com": {
-    "fails": 1,
-    "last_fail": "2026-11-22",
+    "fails": 2,
+    "last_fail": "2026-11-23",
     "name": "厂长 • 影视"
-  },
-  "api.wsyzy.net/api.php/provide/vod": {
-    "fails": 1,
-    "last_fail": "2026-11-22",
-    "name": "🧞旺旺"
   }
 }
