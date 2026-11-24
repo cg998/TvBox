@@ -55,13 +55,13 @@
     "name": "🌼豆瓣┃影视🌼"
   },
   "csp_Jpys|https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn": {
-    "fails": 2,
-    "last_fail": "2026-11-23",
+    "fails": 3,
+    "last_fail": "2026-11-24",
     "name": "金牌 • 影视"
   },
   "csp_Czsapp|https://www.4kcz.com": {
-    "fails": 2,
-    "last_fail": "2026-11-23",
+    "fails": 3,
+    "last_fail": "2026-11-24",
     "name": "厂长 • 影视"
   }
 }
