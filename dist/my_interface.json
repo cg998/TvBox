@@ -378,13 +378,6 @@
       "filterable": 1
     },
     {
-      "key": "金牌影视",
-      "name": "金牌 • 影视",
-      "type": 3,
-      "api": "csp_Jpys",
-      "ext": "https://www.sunnafh.com,https://m.sizhengxt.com,https://m.jiabaide.cn"
-    },
-    {
       "key": "剧圈99",
       "name": "剧圈 • APP",
       "type": 3,
@@ -437,16 +430,6 @@
         "dataKey": "88689667dce61725",
         "dataIv": "88689667dce61725"
       }
-    },
-    {
-      "key": "厂长影视",
-      "name": "厂长 • 影视",
-      "type": 3,
-      "api": "csp_Czsapp",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "ext": "https://www.4kcz.com"
     },
     {
       "key": "咕噜",
@@ -819,16 +802,6 @@
       "searchable": 1,
       "filterable": 0,
       "ext": "{        \"site\": \"https://www.libvio.app\"      }",
-      "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
-    },
-    {
-      "key": "HkTv",
-      "name": "TVB云播影视",
-      "type": 3,
-      "api": "csp_HkTv",
-      "searchable": 0,
-      "filterable": 1,
-      "ext": "http://www.hktvyb.vip/",
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
     },
     {
