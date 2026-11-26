@@ -184,14 +184,6 @@
       ]
     },
     {
-      "key": "极速资源",
-      "name": "🌼极速┃资源🌼",
-      "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "光速资源",
       "name": "🌼光速┃资源🌼",
       "type": 1,
@@ -832,6 +824,14 @@
       "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "极速资源",
+      "name": "🌼极速┃资源🌼",
+      "type": 1,
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;d58aeec66895c8abebe6a78ec6ee8c25",

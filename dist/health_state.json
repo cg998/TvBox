@@ -63,5 +63,10 @@
     "fails": 4,
     "last_fail": "2026-11-25",
     "name": "厂长 • 影视"
+  },
+  "jszyapi.com/api.php/provide/vod": {
+    "fails": 1,
+    "last_fail": "2026-11-26",
+    "name": "🌼极速┃资源🌼"
   }
 }
