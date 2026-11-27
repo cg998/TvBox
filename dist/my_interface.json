@@ -156,14 +156,6 @@
       "filterable": 1
     },
     {
-      "key": "虎牙",
-      "name": "🌼虎牙┃采集🌼",
-      "type": 1,
-      "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "cj_暴风资源",
       "name": "🧞暴风┃短剧",
       "type": 1,
@@ -182,22 +174,6 @@
         "闪婚离婚",
         "古装仙侠"
       ]
-    },
-    {
-      "key": "光速资源",
-      "name": "🌼光速┃资源🌼",
-      "type": 1,
-      "api": "https://api.guangsuapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "金鹰资源",
-      "name": "🌼金鹰┃资源🌼",
-      "type": 1,
-      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
-      "searchable": 1,
-      "quickSearch": 1
     },
     {
       "key": "tv_back-023_taopian",
@@ -824,6 +800,30 @@
       "changeable": 0,
       "ext": {},
       "jar": "https://android.lushunming.qzz.io/jar/custom_spider.jar"
+    },
+    {
+      "key": "虎牙",
+      "name": "🌼虎牙┃采集🌼",
+      "type": 1,
+      "api": "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "光速资源",
+      "name": "🌼光速┃资源🌼",
+      "type": 1,
+      "api": "https://api.guangsuapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "金鹰资源",
+      "name": "🌼金鹰┃资源🌼",
+      "type": 1,
+      "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
+      "searchable": 1,
+      "quickSearch": 1
     },
     {
       "key": "极速资源",
