@@ -824,14 +824,6 @@
       "api": "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
       "searchable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "极速资源",
-      "name": "🌼极速┃资源🌼",
-      "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1
     }
   ],
   "spider": "https://raw.githubusercontent.com/qist/tvbox/master/jar/spider.jar;md5;d58aeec66895c8abebe6a78ec6ee8c25",

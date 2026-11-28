@@ -65,23 +65,23 @@
     "name": "厂长 • 影视"
   },
   "jszyapi.com/api.php/provide/vod": {
-    "fails": 2,
-    "last_fail": "2026-11-27",
+    "fails": 3,
+    "last_fail": "2026-11-28",
     "name": "🌼极速┃资源🌼"
   },
   "jyzyapi.com/provide/vod/from/jinyingm3u8/at/json": {
-    "fails": 1,
-    "last_fail": "2026-11-27",
+    "fails": 2,
+    "last_fail": "2026-11-28",
     "name": "🌼金鹰┃资源🌼"
   },
   "api.guangsuapi.com/api.php/provide/vod": {
-    "fails": 1,
-    "last_fail": "2026-11-27",
+    "fails": 2,
+    "last_fail": "2026-11-28",
     "name": "🌼光速┃资源🌼"
   },
   "www.huyaapi.com/api.php/provide/vod/from/hym3u8": {
-    "fails": 1,
-    "last_fail": "2026-11-27",
+    "fails": 2,
+    "last_fail": "2026-11-28",
     "name": "🌼虎牙┃采集🌼"
   }
 }
